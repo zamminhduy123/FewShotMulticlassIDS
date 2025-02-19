@@ -1,0 +1,2591 @@
+nohup: ignoring input
+Using GPU for training
+CUDA 4 2
+dataset (828470, 16, 9) (828470,) (array([0, 1, 2, 3, 4]), array([512595,  64091,  94406, 103278,  54100]))
+dataset (207120, 16, 9) (207120,) (array([0, 1, 2, 3, 4]), array([128150,  16023,  23602,  25820,  13525]))
+init Conv1dTransformerEncoder with 7 classes
+model size: 0.613MB
+Epochs:   0%|          | 0/100 [00:00<?, ?it/s]
+Current loss:  62.31601333618164
+
+Current loss:  55.702781677246094
+
+Current loss:  59.9138069152832
+
+Current loss:  48.96061325073242
+
+Current loss:  46.97853469848633
+
+Current loss:  48.47827911376953
+
+Current loss:  46.958030700683594
+
+Current loss:  45.44825744628906
+
+Current loss:  52.05828094482422
+
+Current loss:  41.560386657714844
+
+Current loss:  49.90841293334961
+
+Current loss:  36.46318435668945
+
+Current loss:  41.64631271362305
+
+Current loss:  40.33021926879883
+
+Current loss:  45.38805389404297
+
+Current loss:  37.88872528076172
+
+Current loss:  37.290706634521484
+
+Current loss:  35.4677734375
+
+Current loss:  25.4351806640625
+
+Current loss:  26.26115608215332
+
+Current loss:  17.11171531677246
+
+Current loss:  18.618480682373047
+
+Current loss:  16.140522003173828
+
+Current loss:  15.927934646606445
+
+Current loss:  16.19631576538086
+
+Current loss:  15.687999725341797
+
+Current loss:  15.746587753295898
+
+Current loss:  16.955711364746094
+
+Current loss:  16.44859504699707
+
+Current loss:  15.294902801513672
+
+Current loss:  16.035114288330078
+
+Current loss:  16.407398223876953
+
+Current loss:  16.743057250976562
+
+Current loss:  15.870245933532715
+
+Current loss:  15.350135803222656
+
+Current loss:  14.568782806396484
+
+Current loss:  15.466609954833984
+
+Current loss:  16.691131591796875
+
+Current loss:  16.029678344726562
+
+Current loss:  15.212623596191406
+
+Current loss:  16.166194915771484
+
+Current loss:  16.080352783203125
+
+Current loss:  17.005733489990234
+
+Current loss:  18.040231704711914
+
+Current loss:  20.133808135986328
+
+Current loss:  14.915031433105469
+
+Current loss:  14.651288032531738
+
+Current loss:  13.809885025024414
+
+Current loss:  15.883010864257812
+
+Current loss:  15.388422966003418
+
+Current loss:  15.172536849975586
+
+Current loss:  15.507084846496582
+
+Current loss:  15.20732307434082
+
+Current loss:  15.28258991241455
+
+Current loss:  15.646665573120117
+
+Current loss:  16.5959529876709
+
+Current loss:  15.609254837036133
+
+Current loss:  14.469834327697754
+
+Current loss:  14.563909530639648
+
+Current loss:  16.151538848876953
+
+Current loss:  15.013397216796875
+
+Current loss:  14.161739349365234
+
+Current loss:  16.78656005859375
+
+Current loss:  15.761362075805664
+
+Current loss:  15.33072280883789
+
+Current loss:  15.760364532470703
+
+Current loss:  16.88657569885254
+
+Current loss:  14.416581153869629
+
+Current loss:  16.045333862304688
+
+Current loss:  14.631692886352539
+
+Current loss:  17.110328674316406
+
+Current loss:  15.447347640991211
+
+Current loss:  15.741158485412598
+
+Current loss:  15.972326278686523
+
+Current loss:  15.974855422973633
+
+Current loss:  15.565347671508789
+
+Current loss:  15.830686569213867
+
+Current loss:  14.376169204711914
+
+Current loss:  16.153240203857422
+
+Current loss:  18.639516830444336
+
+Current loss:  14.517037391662598
+
+Current loss:  15.547822952270508
+
+Current loss:  15.997364044189453
+
+Current loss:  14.68557071685791
+
+Current loss:  14.86923885345459
+
+Current loss:  14.423715591430664
+Epoch 0 loss: 22.015618126020907, acc: 0.3329704830866256, f1: 0.3259478127059773
+M 5 Way K 5 Shot
+dataset torch.Size([25, 16, 9]) torch.Size([25]) (828470, 16, 9) (828470,) (array([0, 1, 2, 3, 4]), array([512595,  64091,  94406, 103278,  54100]))
+Epochs:   1%|          | 1/100 [59:29<98:08:56, 3569.05s/it]  -- test result: 
+    -- accuracy:  0.2854383932020085
+    -- macro precision:  0.30040443808879547
+    -- macro recall:  0.3195388866071525
+    -- macro f1 score:  0.2568404170386104
+    -- micro precision:  0.2854383932020085
+    -- micro recall:  0.2854383932020085
+    -- micro f1 score:  0.2854383932020085
+              precision    recall  f1-score   support
+
+           0       0.75      0.25      0.38    128150
+           1       0.10      0.38      0.16     16023
+           2       0.20      0.30      0.24     23602
+           3       0.35      0.36      0.36     25820
+           4       0.10      0.31      0.15     13525
+
+    accuracy                           0.29    207120
+   macro avg       0.30      0.32      0.26    207120
+weighted avg       0.54      0.29      0.33    207120
+
+[[32559 44737 14411  7960 28483]
+ [ 4206  6087  1810   848  3072]
+ [ 2823  4313  6972  6312  3182]
+ [ 1794  2732  8375  9372  3547]
+ [ 2048  2136  3116  2095  4130]]
+
+Current loss:  27.519100189208984
+
+Current loss:  27.511051177978516
+
+Current loss:  22.82549476623535
+
+Current loss:  18.17411231994629
+
+Current loss:  18.991121292114258
+
+Current loss:  17.209659576416016
+
+Current loss:  19.176307678222656
+
+Current loss:  15.596283912658691
+
+Current loss:  10.347854614257812
+
+Current loss:  5.044825553894043
+
+Current loss:  4.874319553375244
+
+Current loss:  17.14413070678711
+
+Current loss:  15.548934936523438
+
+Current loss:  2.5576112270355225
+
+Current loss:  6.805047512054443
+
+Current loss:  11.007760047912598
+
+Current loss:  3.06974458694458
+
+Current loss:  3.3666577339172363
+
+Current loss:  3.596890926361084
+
+Current loss:  3.3761682510375977
+
+Current loss:  3.586264133453369
+
+Current loss:  3.555790662765503
+
+Current loss:  2.833909511566162
+
+Current loss:  3.3371963500976562
+
+Current loss:  3.4490394592285156
+
+Current loss:  3.338275194168091
+
+Current loss:  3.175433397293091
+
+Current loss:  3.467597484588623
+
+Current loss:  3.051135301589966
+
+Current loss:  3.1328020095825195
+
+Current loss:  3.0192713737487793
+
+Current loss:  3.326704740524292
+
+Current loss:  3.278709888458252
+
+Current loss:  3.239292621612549
+
+Current loss:  2.7586183547973633
+
+Current loss:  2.494764566421509
+
+Current loss:  3.4584250450134277
+
+Current loss:  2.383625030517578
+
+Current loss:  3.047779083251953
+
+Current loss:  3.0298426151275635
+
+Current loss:  3.0541627407073975
+
+Current loss:  9.930379867553711
+
+Current loss:  3.0815086364746094
+
+Current loss:  2.335585355758667
+
+Current loss:  3.4201862812042236
+
+Current loss:  3.235828161239624
+
+Current loss:  2.3912429809570312
+
+Current loss:  3.2591590881347656
+
+Current loss:  2.9094340801239014
+
+Current loss:  3.4454901218414307
+
+Current loss:  2.322437047958374
+
+Current loss:  3.194117307662964
+
+Current loss:  2.3842062950134277
+
+Current loss:  2.7907323837280273
+
+Current loss:  3.26267147064209
+
+Current loss:  2.8870952129364014
+
+Current loss:  3.4363393783569336
+
+Current loss:  30.968154907226562
+
+Current loss:  3.0354912281036377
+
+Current loss:  3.1329057216644287
+
+Current loss:  3.513763666152954
+
+Current loss:  3.0287978649139404
+
+Current loss:  3.2993686199188232
+
+Current loss:  3.134491443634033
+
+Current loss:  3.4021947383880615
+
+Current loss:  2.757150173187256
+
+Current loss:  3.094454765319824
+
+Current loss:  5.508129119873047
+
+Current loss:  3.294558525085449
+
+Current loss:  2.90854549407959
+
+Current loss:  3.4213829040527344
+
+Current loss:  2.987614631652832
+
+Current loss:  2.9922118186950684
+
+Current loss:  3.0998921394348145
+
+Current loss:  3.4950294494628906
+
+Current loss:  2.6179919242858887
+
+Current loss:  2.867072582244873
+
+Current loss:  3.2657010555267334
+
+Current loss:  3.4490318298339844
+
+Current loss:  3.093545913696289
+
+Current loss:  2.9779717922210693
+
+Current loss:  3.2120044231414795
+
+Current loss:  3.0767879486083984
+
+Current loss:  3.0198709964752197
+
+Current loss:  2.8263700008392334
+
+Current loss:  3.0962297916412354
+Epoch 1 loss: 5.505671443724875, acc: 0.9640368383979994, f1: 0.9628554579116958
+M 5 Way K 5 Shot
+dataset torch.Size([25, 16, 9]) torch.Size([25]) (828470, 16, 9) (828470,) (array([0, 1, 2, 3, 4]), array([512595,  64091,  94406, 103278,  54100]))
+Epochs:   2%|▏         | 2/100 [1:55:08<93:28:37, 3433.85s/it]  -- test result: 
+    -- accuracy:  0.999642719196601
+    -- macro precision:  0.9998845769902671
+    -- macro recall:  0.9990443033005976
+    -- macro f1 score:  0.9994637657120359
+    -- micro precision:  0.999642719196601
+    -- micro recall:  0.999642719196601
+    -- micro f1 score:  0.999642719196601
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00    128150
+           1       1.00      1.00      1.00     16023
+           2       1.00      1.00      1.00     23602
+           3       1.00      1.00      1.00     25820
+           4       1.00      1.00      1.00     13525
+
+    accuracy                           1.00    207120
+   macro avg       1.00      1.00      1.00    207120
+weighted avg       1.00      1.00      1.00    207120
+
+[[128150      0      0      0      0]
+ [    54  15969      0      0      0]
+ [     0      0  23602      0      0]
+ [     2      0      0  25818      0]
+ [    18      0      0      0  13507]]
+
+Current loss:  2.6880295276641846
+
+Current loss:  2.6690711975097656
+
+Current loss:  2.3115649223327637
+
+Current loss:  3.5069165229797363
+
+Current loss:  3.3601653575897217
+
+Current loss:  6.499692916870117
+
+Current loss:  3.1997787952423096
+
+Current loss:  2.696589469909668
+
+Current loss:  2.809899091720581
+
+Current loss:  3.48476243019104
+
+Current loss:  3.3159446716308594
+
+Current loss:  3.1816225051879883
+
+Current loss:  3.1417853832244873
+
+Current loss:  2.9699583053588867
+
+Current loss:  3.18699312210083
+
+Current loss:  3.3600542545318604
+
+Current loss:  2.985595941543579
+
+Current loss:  3.2055561542510986
+
+Current loss:  2.7634143829345703
+
+Current loss:  2.906703472137451
+
+Current loss:  3.3837573528289795
+
+Current loss:  2.8754336833953857
+
+Current loss:  2.95784592628479
+
+Current loss:  2.988619327545166
+
+Current loss:  2.9868340492248535
+
+Current loss:  3.1224913597106934
+
+Current loss:  3.547584295272827
+
+Current loss:  2.23236083984375
+
+Current loss:  3.3273048400878906
+
+Current loss:  2.783486843109131
+
+Current loss:  3.0549869537353516
+
+Current loss:  2.8285319805145264
+
+Current loss:  3.348747968673706
+
+Current loss:  3.459320068359375
+
+Current loss:  3.32085919380188
+
+Current loss:  3.4484140872955322
+
+Current loss:  2.976571798324585
+
+Current loss:  3.211913824081421
+
+Current loss:  3.13627028465271
+
+Current loss:  2.8818607330322266
+
+Current loss:  2.8698530197143555
+
+Current loss:  3.3522753715515137
+
+Current loss:  2.640352964401245
+
+Current loss:  3.428525924682617
+
+Current loss:  2.844409465789795
+
+Current loss:  2.4044249057769775
+
+Current loss:  3.4659953117370605
+
+Current loss:  3.178037405014038
+
+Current loss:  3.1814117431640625
+
+Current loss:  3.3660080432891846
+
+Current loss:  2.9305002689361572
+
+Current loss:  3.2516887187957764
+
+Current loss:  3.3146331310272217
+
+Current loss:  2.423114538192749
+
+Current loss:  2.9061508178710938
+
+Current loss:  2.9926886558532715
+
+Current loss:  2.9269614219665527
+
+Current loss:  2.9584531784057617
+
+Current loss:  2.859449863433838
+
+Current loss:  3.1479415893554688
+
+Current loss:  3.377617835998535
+
+Current loss:  2.670635938644409
+
+Current loss:  2.9176440238952637
+
+Current loss:  2.5009143352508545
+
+Current loss:  2.872854232788086
+
+Current loss:  3.3161864280700684
+
+Current loss:  2.864513635635376
+
+Current loss:  3.0686185359954834
+
+Current loss:  3.446183919906616
+
+Current loss:  3.4817566871643066
+
+Current loss:  3.051079273223877
+
+Current loss:  3.3318684101104736
+
+Current loss:  2.7927262783050537
+
+Current loss:  3.166250228881836
+
+Current loss:  2.6498749256134033
+
+Current loss:  2.9156343936920166
+
+Current loss:  3.232210636138916
+
+Current loss:  3.1397247314453125
+
+Current loss:  3.0443522930145264
+
+Current loss:  2.497678756713867
+
+Current loss:  2.9717328548431396
+
+Current loss:  2.2887423038482666
+
+Current loss:  3.262126922607422
+
+Current loss:  3.429297924041748
+
+Current loss:  3.2367565631866455
+
+Current loss:  2.382270097732544
+Epoch 2 loss: 3.2775213015410207, acc: 0.9993522967888128, f1: 0.9993401721424665
+M 5 Way K 5 Shot
+dataset torch.Size([25, 16, 9]) torch.Size([25]) (828470, 16, 9) (828470,) (array([0, 1, 2, 3, 4]), array([512595,  64091,  94406, 103278,  54100]))
+Epochs:   3%|▎         | 3/100 [2:37:22<81:27:00, 3022.89s/it]  -- test result: 
+    -- accuracy:  0.9998986095017381
+    -- macro precision:  0.9998253486105465
+    -- macro recall:  0.9998683279512999
+    -- macro f1 score:  0.9998468119168125
+    -- micro precision:  0.9998986095017381
+    -- micro recall:  0.9998986095017381
+    -- micro f1 score:  0.9998986095017381
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00    128150
+           1       1.00      1.00      1.00     16023
+           2       1.00      1.00      1.00     23602
+           3       1.00      1.00      1.00     25820
+           4       1.00      1.00      1.00     13525
+
+    accuracy                           1.00    207120
+   macro avg       1.00      1.00      1.00    207120
+weighted avg       1.00      1.00      1.00    207120
+
+[[128137     13      0      0      0]
+ [     3  16020      0      0      0]
+ [     0      0  23602      0      0]
+ [     0      0      0  25820      0]
+ [     5      0      0      0  13520]]
+
+Current loss:  2.245748519897461
+
+Current loss:  3.6041812896728516
+
+Current loss:  3.7798657417297363
+
+Current loss:  3.3533434867858887
+
+Current loss:  3.119601011276245
+
+Current loss:  3.0782763957977295
+
+Current loss:  2.2908968925476074
+
+Current loss:  2.882392406463623
+
+Current loss:  3.4839768409729004
+
+Current loss:  2.9682822227478027
+
+Current loss:  2.9314804077148438
+
+Current loss:  3.094616413116455
+
+Current loss:  2.3407809734344482
+
+Current loss:  3.2549219131469727
+
+Current loss:  3.4094204902648926
+
+Current loss:  2.947162628173828
+
+Current loss:  3.3901474475860596
+
+Current loss:  3.4690957069396973
+
+Current loss:  3.4840869903564453
+
+Current loss:  3.2939956188201904
+
+Current loss:  2.797701597213745
+
+Current loss:  2.6071441173553467
+
+Current loss:  3.056065082550049
+
+Current loss:  2.943577289581299
+
+Current loss:  3.526888370513916
+
+Current loss:  3.1312451362609863
+
+Current loss:  3.5071628093719482
+
+Current loss:  2.926821708679199
+
+Current loss:  2.8935372829437256
+
+Current loss:  2.560412883758545
+
+Current loss:  2.5229060649871826
+
+Current loss:  3.057126998901367
+
+Current loss:  3.085390567779541
+
+Current loss:  2.907217025756836
+
+Current loss:  2.987327814102173
+
+Current loss:  3.070897102355957
+
+Current loss:  3.172604560852051
+
+Current loss:  3.6250972747802734
+
+Current loss:  3.254500150680542
+
+Current loss:  11.195789337158203
+
+Current loss:  3.2121615409851074
+
+Current loss:  2.305084705352783
+
+Current loss:  2.459507942199707
+
+Current loss:  2.7723543643951416
+
+Current loss:  2.9528441429138184
+
+Current loss:  2.955571174621582
+
+Current loss:  2.570725440979004
+
+Current loss:  3.086653709411621
+
+Current loss:  2.515427827835083
+
+Current loss:  2.947549343109131
+
+Current loss:  2.9763286113739014
+
+Current loss:  3.339892625808716
+
+Current loss:  2.427830219268799
+
+Current loss:  2.370443820953369
+
+Current loss:  3.6257879734039307
+
+Current loss:  3.1594738960266113
+
+Current loss:  2.9406564235687256
+
+Current loss:  3.5832509994506836
+
+Current loss:  3.3546273708343506
+
+Current loss:  3.274254083633423
+
+Current loss:  3.0708441734313965
+
+Current loss:  2.878678798675537
+
+Current loss:  2.485900402069092
+
+Current loss:  2.8380165100097656
+
+Current loss:  3.2815356254577637
+
+Current loss:  3.248959541320801
+
+Current loss:  3.1449005603790283
+
+Current loss:  2.851500988006592
+
+Current loss:  2.917346954345703
+
+Current loss:  2.251082420349121
+
+Current loss:  3.411534309387207
+
+Current loss:  2.7563509941101074
+
+Current loss:  3.2270452976226807
+
+Current loss:  2.8740522861480713
+
+Current loss:  2.7649502754211426
+
+Current loss:  3.0548813343048096
+
+Current loss:  2.824617862701416
+
+Current loss:  2.799055337905884
+
+Current loss:  3.1859383583068848
+
+Current loss:  2.4645700454711914
+
+Current loss:  2.9976797103881836
+
+Current loss:  3.125610828399658
+
+Current loss:  3.134044647216797
+
+Current loss:  3.609731674194336
+
+Current loss:  3.463914394378662
+
+Current loss:  2.720935344696045
+Epoch 3 loss: 3.2507733899202136, acc: 0.9993991186478427, f1: 0.999390339177299
+M 5 Way K 5 Shot
+dataset torch.Size([25, 16, 9]) torch.Size([25]) (828470, 16, 9) (828470,) (array([0, 1, 2, 3, 4]), array([512595,  64091,  94406, 103278,  54100]))
+Epochs:   4%|▍         | 4/100 [3:19:31<75:24:59, 2828.12s/it]Validation loss: 4.19183768112423, acc: 0.9985567269076305, f1: 0.9992705888295399
+
+Current loss:  3.1328532695770264
+
+Current loss:  2.6866514682769775
+
+Current loss:  2.32891583442688
+
+Current loss:  2.5785632133483887
+
+Current loss:  3.076591730117798
+
+Current loss:  3.6360504627227783
+
+Current loss:  3.2465665340423584
+
+Current loss:  3.2099008560180664
+
+Current loss:  2.5567126274108887
+
+Current loss:  2.353071928024292
+
+Current loss:  3.093787908554077
+
+Current loss:  3.348580837249756
+
+Current loss:  3.389167547225952
+
+Current loss:  2.806867837905884
+
+Current loss:  2.929497003555298
+
+Current loss:  3.2347371578216553
+
+Current loss:  3.1836607456207275
+
+Current loss:  2.8915698528289795
+
+Current loss:  3.3244409561157227
+
+Current loss:  3.515857458114624
+
+Current loss:  3.2324390411376953
+
+Current loss:  3.4531986713409424
+
+Current loss:  2.673438310623169
+
+Current loss:  2.944190263748169
+
+Current loss:  2.474350929260254
+
+Current loss:  2.95782732963562
+
+Current loss:  3.1834280490875244
+
+Current loss:  3.3329296112060547
+
+Current loss:  2.8880138397216797
+
+Current loss:  2.8617351055145264
+
+Current loss:  2.2719500064849854
+
+Current loss:  3.410555601119995
+
+Current loss:  3.040011405944824
+
+Current loss:  2.389867067337036
+
+Current loss:  3.099830150604248
+
+Current loss:  2.7937850952148438
+
+Current loss:  2.9686052799224854
+
+Current loss:  3.128901481628418
+
+Current loss:  3.398099422454834
+
+Current loss:  3.002953290939331
+
+Current loss:  2.491687774658203
+
+Current loss:  3.6558663845062256
+
+Current loss:  3.3789350986480713
+
+Current loss:  3.3327760696411133
+
+Current loss:  3.4072790145874023
+
+Current loss:  3.3049185276031494
+
+Current loss:  2.9892702102661133
+
+Current loss:  2.741973638534546
+
+Current loss:  3.5134739875793457
+
+Current loss:  2.762932777404785
+
+Current loss:  2.943239450454712
+
+Current loss:  2.5167956352233887
+
+Current loss:  3.1419436931610107
+
+Current loss:  3.084238052368164
+
+Current loss:  3.1286780834198
+
+Current loss:  2.899332284927368
+
+Current loss:  2.9970505237579346
+
+Current loss:  2.9774281978607178
+
+Current loss:  2.8952090740203857
+
+Current loss:  2.5034992694854736
+
+Current loss:  2.2331531047821045
+
+Current loss:  3.136232614517212
+
+Current loss:  3.45451283454895
+
+Current loss:  3.3012900352478027
+
+Current loss:  10.553436279296875
+
+Current loss:  2.2235524654388428
+
+Current loss:  3.2194557189941406
+
+Current loss:  2.841571807861328
+
+Current loss:  2.33951997756958
+
+Current loss:  3.457423686981201
+
+Current loss:  3.0081448554992676
+
+Current loss:  3.267296075820923
+
+Current loss:  2.5098321437835693
+
+Current loss:  2.5341646671295166
+
+Current loss:  3.3302478790283203
+
+Current loss:  3.4529612064361572
+
+Current loss:  3.039679765701294
+
+Current loss:  2.247593879699707
+
+Current loss:  3.531766653060913
+
+Current loss:  3.390071392059326
+
+Current loss:  2.883488416671753
+
+Current loss:  3.3322904109954834
+
+Current loss:  3.1254804134368896
+
+Current loss:  2.501807928085327
+
+Current loss:  3.117459774017334
+
+Current loss:  3.1954855918884277
+Epoch 4 loss: 3.1927012782402175, acc: 0.9994966642514445, f1: 0.9994846428212928
+M 5 Way K 5 Shot
+dataset torch.Size([25, 16, 9]) torch.Size([25]) (828470, 16, 9) (828470,) (array([0, 1, 2, 3, 4]), array([512595,  64091,  94406, 103278,  54100]))
+Epochs:   5%|▌         | 5/100 [4:01:16<71:33:01, 2711.39s/it]Validation loss: 4.1452769667490195, acc: 0.9990780429409948, f1: 0.999534916043964
+
+Current loss:  2.7439308166503906
+
+Current loss:  3.2139346599578857
+
+Current loss:  3.255115032196045
+
+Current loss:  3.0466315746307373
+
+Current loss:  3.0890142917633057
+
+Current loss:  2.7254257202148438
+
+Current loss:  3.3305282592773438
+
+Current loss:  3.0000088214874268
+
+Current loss:  3.2741737365722656
+
+Current loss:  3.2190940380096436
+
+Current loss:  2.502706289291382
+
+Current loss:  3.346005439758301
+
+Current loss:  3.0620079040527344
+
+Current loss:  3.3620314598083496
+
+Current loss:  3.63752818107605
+
+Current loss:  2.3506693840026855
+
+Current loss:  2.5247511863708496
+
+Current loss:  2.467794418334961
+
+Current loss:  15.145448684692383
+
+Current loss:  2.967437744140625
+
+Current loss:  2.3847861289978027
+
+Current loss:  3.1472644805908203
+
+Current loss:  3.3498051166534424
+
+Current loss:  2.4073729515075684
+
+Current loss:  2.2979252338409424
+
+Current loss:  3.1756908893585205
+
+Current loss:  2.813788414001465
+
+Current loss:  2.8579320907592773
+
+Current loss:  3.0559911727905273
+
+Current loss:  2.86494517326355
+
+Current loss:  3.5426571369171143
+
+Current loss:  4.705593585968018
+
+Current loss:  2.549912929534912
+
+Current loss:  2.8323988914489746
+
+Current loss:  3.155474901199341
+
+Current loss:  3.3262789249420166
+
+Current loss:  3.5505924224853516
+
+Current loss:  3.1073594093322754
+
+Current loss:  3.8652896881103516
+
+Current loss:  3.1875200271606445
+
+Current loss:  3.1812148094177246
+
+Current loss:  2.598315954208374
+
+Current loss:  3.089728355407715
+
+Current loss:  3.2361717224121094
+
+Current loss:  2.441635847091675
+
+Current loss:  2.814743995666504
+
+Current loss:  3.1683812141418457
+
+Current loss:  3.0555758476257324
+
+Current loss:  3.0289249420166016
+
+Current loss:  3.0655956268310547
+
+Current loss:  3.305198907852173
+
+Current loss:  2.517672538757324
+
+Current loss:  3.3321125507354736
+
+Current loss:  3.494910478591919
+
+Current loss:  2.7718610763549805
+
+Current loss:  3.3394172191619873
+
+Current loss:  2.9507410526275635
+
+Current loss:  2.893991231918335
+
+Current loss:  2.579876184463501
+
+Current loss:  3.494037628173828
+
+Current loss:  2.9202537536621094
+
+Current loss:  25.537086486816406
+
+Current loss:  26.082714080810547
+
+Current loss:  3.374033212661743
+
+Current loss:  3.325901508331299
+
+Current loss:  3.015415906906128
+
+Current loss:  3.3179550170898438
+
+Current loss:  2.996422052383423
+
+Current loss:  2.736711263656616
+
+Current loss:  3.4838457107543945
+
+Current loss:  2.9380362033843994
+
+Current loss:  2.9821999073028564
+
+Current loss:  2.4456067085266113
+
+Current loss:  3.181912660598755
+
+Current loss:  3.2250888347625732
+
+Current loss:  3.3211252689361572
+
+Current loss:  2.9420037269592285
+
+Current loss:  3.176455020904541
+
+Current loss:  3.612786293029785
+
+Current loss:  2.372642755508423
+
+Current loss:  2.784147024154663
+
+Current loss:  3.2464942932128906
+
+Current loss:  2.9821596145629883
+
+Current loss:  3.1979076862335205
+
+Current loss:  2.6883769035339355
+
+Current loss:  2.7280569076538086
+Epoch 5 loss: 3.773003262224904, acc: 0.9943969733895344, f1: 0.9941189307576578
+M 5 Way K 5 Shot
+dataset torch.Size([25, 16, 9]) torch.Size([25]) (828470, 16, 9) (828470,) (array([0, 1, 2, 3, 4]), array([512595,  64091,  94406, 103278,  54100]))
+Epochs:   6%|▌         | 6/100 [4:43:29<69:13:10, 2650.96s/it]Validation loss: 4.195985449365823, acc: 0.9974803058387396, f1: 0.998725572176549
+
+Current loss:  3.1729390621185303
+
+Current loss:  2.8747293949127197
+
+Current loss:  2.826235294342041
+
+Current loss:  3.2489733695983887
+
+Current loss:  2.458183765411377
+
+Current loss:  2.5628583431243896
+
+Current loss:  2.2974178791046143
+
+Current loss:  3.245173454284668
+
+Current loss:  3.5592057704925537
+
+Current loss:  2.8849315643310547
+
+Current loss:  3.2106690406799316
+
+Current loss:  3.087752103805542
+
+Current loss:  2.3862898349761963
+
+Current loss:  2.2186291217803955
+
+Current loss:  2.9161484241485596
+
+Current loss:  2.9114959239959717
+
+Current loss:  2.2537424564361572
+
+Current loss:  2.5828123092651367
+
+Current loss:  2.9495341777801514
+
+Current loss:  2.9154491424560547
+
+Current loss:  3.356166362762451
+
+Current loss:  3.5720558166503906
+
+Current loss:  2.2839157581329346
+
+Current loss:  3.6235973834991455
+
+Current loss:  2.7451109886169434
+
+Current loss:  2.994356632232666
+
+Current loss:  2.4270498752593994
+
+Current loss:  3.375749349594116
+
+Current loss:  3.5559208393096924
+
+Current loss:  3.509289503097534
+
+Current loss:  3.5465097427368164
+
+Current loss:  3.0862298011779785
+
+Current loss:  3.1330413818359375
+
+Current loss:  2.9384148120880127
+
+Current loss:  3.45774245262146
+
+Current loss:  2.8189940452575684
+
+Current loss:  3.3560259342193604
+
+Current loss:  3.4530575275421143
+
+Current loss:  3.224059820175171
+
+Current loss:  3.6893978118896484
+
+Current loss:  3.5301918983459473
+
+Current loss:  2.5875203609466553
+
+Current loss:  3.48796010017395
+
+Current loss:  3.1062707901000977
+
+Current loss:  2.8462905883789062
+
+Current loss:  2.963833808898926
+
+Current loss:  2.9117119312286377
+
+Current loss:  3.524651050567627
+
+Current loss:  2.9899299144744873
+
+Current loss:  3.4527857303619385
+
+Current loss:  2.998324394226074
+
+Current loss:  2.97170352935791
+
+Current loss:  3.5318257808685303
+
+Current loss:  3.1198806762695312
+
+Current loss:  3.488994836807251
+
+Current loss:  3.333789825439453
+
+Current loss:  2.192134380340576
+
+Current loss:  3.5033419132232666
+
+Current loss:  3.3401501178741455
+
+Current loss:  2.58736252784729
+
+Current loss:  2.349212169647217
+
+Current loss:  2.9737651348114014
+
+Current loss:  3.311270236968994
+
+Current loss:  3.6056606769561768
+
+Current loss:  3.341846466064453
+
+Current loss:  3.2147974967956543
+
+Current loss:  2.5466771125793457
+
+Current loss:  2.93017578125
+
+Current loss:  2.776066780090332
+
+Current loss:  3.2928261756896973
+
+Current loss:  3.174544334411621
+
+Current loss:  2.712714672088623
+
+Current loss:  2.855137348175049
+
+Current loss:  3.521348476409912
+
+Current loss:  3.2516093254089355
+
+Current loss:  3.094733238220215
+
+Current loss:  2.8992409706115723
+
+Current loss:  2.237048625946045
+
+Current loss:  2.882117509841919
+
+Current loss:  3.228545665740967
+
+Current loss:  2.708631992340088
+
+Current loss:  2.8766214847564697
+
+Current loss:  3.0681190490722656
+
+Current loss:  3.1833930015563965
+
+Current loss:  3.463724136352539
+
+Current loss:  2.1855056285858154
+Epoch 6 loss: 3.1557187507990636, acc: 0.9994459404824532, f1: 0.9994188399900679
+M 5 Way K 5 Shot
+dataset torch.Size([25, 16, 9]) torch.Size([25]) (828470, 16, 9) (828470,) (array([0, 1, 2, 3, 4]), array([512595,  64091,  94406, 103278,  54100]))
+Epochs:   7%|▋         | 7/100 [5:33:11<71:16:28, 2759.01s/it]  -- test result: 
+    -- accuracy:  0.9999613750482812
+    -- macro precision:  0.999987515410665
+    -- macro recall:  0.999900143543656
+    -- macro f1 score:  0.999943816815071
+    -- micro precision:  0.9999613750482812
+    -- micro recall:  0.9999613750482812
+    -- micro f1 score:  0.9999613750482812
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00    128150
+           1       1.00      1.00      1.00     16023
+           2       1.00      1.00      1.00     23602
+           3       1.00      1.00      1.00     25820
+           4       1.00      1.00      1.00     13525
+
+    accuracy                           1.00    207120
+   macro avg       1.00      1.00      1.00    207120
+weighted avg       1.00      1.00      1.00    207120
+
+[[128150      0      0      0      0]
+ [     8  16015      0      0      0]
+ [     0      0  23602      0      0]
+ [     0      0      0  25820      0]
+ [     0      0      0      0  13525]]
+
+Current loss:  2.8680059909820557
+
+Current loss:  2.3358795642852783
+
+Current loss:  2.5311150550842285
+
+Current loss:  2.804861068725586
+
+Current loss:  2.2394914627075195
+
+Current loss:  3.4696178436279297
+
+Current loss:  2.636033773422241
+
+Current loss:  2.236191511154175
+
+Current loss:  2.9321625232696533
+
+Current loss:  2.211282968521118
+
+Current loss:  2.911665439605713
+
+Current loss:  2.259483814239502
+
+Current loss:  3.265280246734619
+
+Current loss:  2.9531021118164062
+
+Current loss:  3.4899702072143555
+
+Current loss:  3.4880027770996094
+
+Current loss:  2.937594175338745
+
+Current loss:  2.207355499267578
+
+Current loss:  3.222351312637329
+
+Current loss:  2.8776540756225586
+
+Current loss:  3.3575756549835205
+
+Current loss:  2.847750425338745
+
+Current loss:  3.233797550201416
+
+Current loss:  2.8844666481018066
+
+Current loss:  2.2252485752105713
+
+Current loss:  3.514690399169922
+
+Current loss:  3.193638324737549
+
+Current loss:  3.4454355239868164
+
+Current loss:  3.499316692352295
+
+Current loss:  2.899083375930786
+
+Current loss:  3.19954252243042
+
+Current loss:  3.0995545387268066
+
+Current loss:  2.329009771347046
+
+Current loss:  2.9366369247436523
+
+Current loss:  3.477562427520752
+
+Current loss:  3.2580833435058594
+
+Current loss:  2.878715753555298
+
+Current loss:  2.871840476989746
+
+Current loss:  2.226879596710205
+
+Current loss:  3.4278018474578857
+
+Current loss:  2.574553966522217
+
+Current loss:  2.891620397567749
+
+Current loss:  3.1669187545776367
+
+Current loss:  3.5003342628479004
+
+Current loss:  3.122540235519409
+
+Current loss:  2.8862085342407227
+
+Current loss:  3.0605826377868652
+
+Current loss:  2.5477499961853027
+
+Current loss:  2.4958999156951904
+
+Current loss:  2.919020175933838
+
+Current loss:  2.8730955123901367
+
+Current loss:  2.7165894508361816
+
+Current loss:  3.371565818786621
+
+Current loss:  3.2080814838409424
+
+Current loss:  3.4467172622680664
+
+Current loss:  3.3471033573150635
+
+Current loss:  3.0078845024108887
+
+Current loss:  3.4277968406677246
+
+Current loss:  2.1983864307403564
+
+Current loss:  2.2435121536254883
+
+Current loss:  3.1860833168029785
+
+Current loss:  3.43160080909729
+
+Current loss:  2.2304420471191406
+
+Current loss:  3.2483184337615967
+
+Current loss:  2.8053107261657715
+
+Current loss:  3.3867690563201904
+
+Current loss:  3.433912754058838
+
+Current loss:  3.498307466506958
+
+Current loss:  2.8980278968811035
+
+Current loss:  2.7562849521636963
+
+Current loss:  2.8896796703338623
+
+Current loss:  2.8488049507141113
+
+Current loss:  2.883437156677246
+
+Current loss:  3.4701430797576904
+
+Current loss:  3.466768503189087
+
+Current loss:  3.474454641342163
+
+Current loss:  3.4020869731903076
+
+Current loss:  3.3588831424713135
+
+Current loss:  3.287665367126465
+
+Current loss:  2.4917831420898438
+
+Current loss:  3.568122148513794
+
+Current loss:  2.688300132751465
+
+Current loss:  2.968581199645996
+
+Current loss:  3.5066111087799072
+
+Current loss:  3.2081921100616455
+
+Current loss:  3.2596380710601807
+Epoch 7 loss: inf, acc: 0.9998946506881078, f1: 0.9998933401280352
+M 5 Way K 5 Shot
+dataset torch.Size([25, 16, 9]) torch.Size([25]) (828470, 16, 9) (828470,) (array([0, 1, 2, 3, 4]), array([512595,  64091,  94406, 103278,  54100]))
+Epochs:   8%|▊         | 8/100 [6:19:31<70:40:42, 2765.68s/it]  -- test result: 
+    -- accuracy:  0.9999855156431054
+    -- macro precision:  0.9999953180963381
+    -- macro recall:  0.999962553828871
+    -- macro f1 score:  0.9999789341822701
+    -- micro precision:  0.9999855156431054
+    -- micro recall:  0.9999855156431054
+    -- micro f1 score:  0.9999855156431054
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00    128150
+           1       1.00      1.00      1.00     16023
+           2       1.00      1.00      1.00     23602
+           3       1.00      1.00      1.00     25820
+           4       1.00      1.00      1.00     13525
+
+    accuracy                           1.00    207120
+   macro avg       1.00      1.00      1.00    207120
+weighted avg       1.00      1.00      1.00    207120
+
+[[128150      0      0      0      0]
+ [     3  16020      0      0      0]
+ [     0      0  23602      0      0]
+ [     0      0      0  25820      0]
+ [     0      0      0      0  13525]]
+
+Current loss:  2.569736957550049
+
+Current loss:  3.467454671859741
+
+Current loss:  3.2748289108276367
+
+Current loss:  3.028078079223633
+
+Current loss:  2.2575788497924805
+
+Current loss:  2.805746078491211
+
+Current loss:  3.665524959564209
+
+Current loss:  2.6506431102752686
+
+Current loss:  2.8362948894500732
+
+Current loss:  3.5121982097625732
+
+Current loss:  2.3877029418945312
+
+Current loss:  3.215778112411499
+
+Current loss:  3.4667420387268066
+
+Current loss:  3.206343650817871
+
+Current loss:  3.317220449447632
+
+Current loss:  2.2202365398406982
+
+Current loss:  2.8328020572662354
+
+Current loss:  2.946831464767456
+
+Current loss:  2.8298401832580566
+
+Current loss:  2.6370232105255127
+
+Current loss:  2.9144601821899414
+
+Current loss:  3.4745664596557617
+
+Current loss:  3.0765998363494873
+
+Current loss:  2.7990872859954834
+
+Current loss:  3.5259556770324707
+
+Current loss:  3.1427643299102783
+
+Current loss:  3.1005330085754395
+
+Current loss:  2.205287456512451
+
+Current loss:  2.5395796298980713
+
+Current loss:  3.5077948570251465
+
+Current loss:  2.861081600189209
+
+Current loss:  2.2171123027801514
+
+Current loss:  2.4852983951568604
+
+Current loss:  2.863205671310425
+
+Current loss:  3.213001012802124
+
+Current loss:  3.266197919845581
+
+Current loss:  2.4914920330047607
+
+Current loss:  2.9702510833740234
+
+Current loss:  17.561492919921875
+
+Current loss:  2.850022554397583
+
+Current loss:  2.7997920513153076
+
+Current loss:  2.851365327835083
+
+Current loss:  3.044677495956421
+
+Current loss:  2.8771305084228516
+
+Current loss:  3.3533120155334473
+
+Current loss:  2.926107168197632
+
+Current loss:  2.7584524154663086
+
+Current loss:  3.4905009269714355
+
+Current loss:  3.398012161254883
+
+Current loss:  3.399815082550049
+
+Current loss:  3.2493879795074463
+
+Current loss:  3.2499005794525146
+
+Current loss:  2.875563144683838
+
+Current loss:  2.8239128589630127
+
+Current loss:  3.476395606994629
+
+Current loss:  2.778768301010132
+
+Current loss:  2.8597424030303955
+
+Current loss:  3.451903820037842
+
+Current loss:  3.6286776065826416
+
+Current loss:  2.901150703430176
+
+Current loss:  3.0333731174468994
+
+Current loss:  3.0498204231262207
+
+Current loss:  3.6123781204223633
+
+Current loss:  2.9821994304656982
+
+Current loss:  2.588524103164673
+
+Current loss:  2.402047872543335
+
+Current loss:  2.9344120025634766
+
+Current loss:  2.8305869102478027
+
+Current loss:  3.003657817840576
+
+Current loss:  2.94632625579834
+
+Current loss:  2.900036334991455
+
+Current loss:  3.4712517261505127
+
+Current loss:  3.4364724159240723
+
+Current loss:  2.6574625968933105
+
+Current loss:  3.1768879890441895
+
+Current loss:  2.2434592247009277
+
+Current loss:  2.8692708015441895
+
+Current loss:  3.136251211166382
+
+Current loss:  3.2970902919769287
+
+Current loss:  2.8720264434814453
+
+Current loss:  3.151575803756714
+
+Current loss:  2.854665517807007
+
+Current loss:  2.8294484615325928
+
+Current loss:  3.260007619857788
+
+Current loss:  3.117971897125244
+
+Current loss:  3.4881703853607178
+Epoch 8 loss: 3.1122498302399437, acc: 0.9997580867279445, f1: 0.9997551404639078
+M 5 Way K 5 Shot
+dataset torch.Size([25, 16, 9]) torch.Size([25]) (828470, 16, 9) (828470,) (array([0, 1, 2, 3, 4]), array([512595,  64091,  94406, 103278,  54100]))
+Epochs:   9%|▉         | 9/100 [7:05:47<69:59:26, 2768.87s/it]Validation loss: 4.046763925814577, acc: 0.9999758649984554, f1: 0.9999878374795367
+
+Current loss:  2.473895311355591
+
+Current loss:  3.0170655250549316
+
+Current loss:  3.085554361343384
+
+Current loss:  2.4093916416168213
+
+Current loss:  3.043872594833374
+
+Current loss:  2.553189277648926
+
+Current loss:  2.933964490890503
+
+Current loss:  3.089759349822998
+
+Current loss:  2.2335426807403564
+
+Current loss:  3.091944456100464
+
+Current loss:  2.270416259765625
+
+Current loss:  3.3453292846679688
+
+Current loss:  2.594632863998413
+
+Current loss:  2.9231603145599365
+
+Current loss:  2.928673267364502
+
+Current loss:  3.310077428817749
+
+Current loss:  2.25462007522583
+
+Current loss:  3.112011432647705
+
+Current loss:  3.5189104080200195
+
+Current loss:  3.405388832092285
+
+Current loss:  2.9014358520507812
+
+Current loss:  3.5165469646453857
+
+Current loss:  2.870680332183838
+
+Current loss:  2.2178151607513428
+
+Current loss:  3.107287645339966
+
+Current loss:  2.856334686279297
+
+Current loss:  3.340102434158325
+
+Current loss:  2.8835673332214355
+
+Current loss:  2.480497360229492
+
+Current loss:  2.875565528869629
+
+Current loss:  2.4108307361602783
+
+Current loss:  2.8044638633728027
+
+Current loss:  2.771681308746338
+
+Current loss:  2.8296217918395996
+
+Current loss:  2.8693292140960693
+
+Current loss:  2.2148289680480957
+
+Current loss:  2.5740838050842285
+
+Current loss:  2.932959794998169
+
+Current loss:  3.4653162956237793
+
+Current loss:  3.3721046447753906
+
+Current loss:  3.488476037979126
+
+Current loss:  3.5979104042053223
+
+Current loss:  2.9330830574035645
+
+Current loss:  3.457998037338257
+
+Current loss:  3.829934597015381
+
+Current loss:  3.0791940689086914
+
+Current loss:  2.747187852859497
+
+Current loss:  2.8792502880096436
+
+Current loss:  3.043280839920044
+
+Current loss:  3.3838274478912354
+
+Current loss:  2.601665735244751
+
+Current loss:  3.084188461303711
+
+Current loss:  2.82252836227417
+
+Current loss:  2.9942383766174316
+
+Current loss:  3.2895185947418213
+
+Current loss:  3.1444380283355713
+
+Current loss:  2.717456102371216
+
+Current loss:  2.7185075283050537
+
+Current loss:  3.1973440647125244
+
+Current loss:  2.867828607559204
+
+Current loss:  2.4643425941467285
+
+Current loss:  3.5078766345977783
+
+Current loss:  3.498448133468628
+
+Current loss:  2.8756468296051025
+
+Current loss:  2.9547407627105713
+
+Current loss:  3.2587177753448486
+
+Current loss:  3.375761032104492
+
+Current loss:  3.44665789604187
+
+Current loss:  3.0662436485290527
+
+Current loss:  2.9147768020629883
+
+Current loss:  2.8873682022094727
+
+Current loss:  2.9765591621398926
+
+Current loss:  2.9027185440063477
+
+Current loss:  2.857924222946167
+
+Current loss:  2.826791286468506
+
+Current loss:  3.0544962882995605
+
+Current loss:  2.644613742828369
+
+Current loss:  3.46181583404541
+
+Current loss:  2.9492249488830566
+
+Current loss:  2.4314818382263184
+
+Current loss:  3.4825797080993652
+
+Current loss:  2.5303778648376465
+
+Current loss:  2.234463930130005
+
+Current loss:  2.9004015922546387
+
+Current loss:  23.420869827270508
+
+Current loss:  3.1583073139190674
+Epoch 9 loss: 3.1882001811135474, acc: 0.9997190684585957, f1: 0.9997142747610968
+M 5 Way K 5 Shot
+dataset torch.Size([25, 16, 9]) torch.Size([25]) (828470, 16, 9) (828470,) (array([0, 1, 2, 3, 4]), array([512595,  64091,  94406, 103278,  54100]))
+Epochs:  10%|█         | 10/100 [7:58:09<72:06:07, 2884.08s/it]Validation loss: 4.182113965205068, acc: 0.9994883379672537, f1: 0.9997416121563736
+
+Current loss:  3.4956247806549072
+
+Current loss:  3.30493426322937
+
+Current loss:  3.3491744995117188
+
+Current loss:  2.8022146224975586
+
+Current loss:  2.893044948577881
+
+Current loss:  2.9227287769317627
+
+Current loss:  2.392202138900757
+
+Current loss:  3.4667623043060303
+
+Current loss:  3.1677024364471436
+
+Current loss:  2.6187500953674316
+
+Current loss:  3.233731508255005
+
+Current loss:  2.716195583343506
+
+Current loss:  2.987511396408081
+
+Current loss:  2.89845609664917
+
+Current loss:  3.0162086486816406
+
+Current loss:  3.545001745223999
+
+Current loss:  2.9108102321624756
+
+Current loss:  2.591484785079956
+
+Current loss:  2.8686532974243164
+
+Current loss:  3.471712589263916
+
+Current loss:  3.2371952533721924
+
+Current loss:  3.587437868118286
+
+Current loss:  2.674182653427124
+
+Current loss:  3.314728021621704
+
+Current loss:  3.055230140686035
+
+Current loss:  3.0037119388580322
+
+Current loss:  3.284520387649536
+
+Current loss:  2.8989906311035156
+
+Current loss:  2.855604887008667
+
+Current loss:  2.638087511062622
+
+Current loss:  2.496595621109009
+
+Current loss:  3.3152427673339844
+
+Current loss:  2.760201930999756
+
+Current loss:  2.8676397800445557
+
+Current loss:  2.2195842266082764
+
+Current loss:  2.8467557430267334
+
+Current loss:  3.4562458992004395
+
+Current loss:  3.1996004581451416
+
+Current loss:  2.919990301132202
+
+Current loss:  3.474451780319214
+
+Current loss:  3.551250696182251
+
+Current loss:  3.0421221256256104
+
+Current loss:  3.4739911556243896
+
+Current loss:  2.6550605297088623
+
+Current loss:  25.401166915893555
+
+Current loss:  3.4430017471313477
+
+Current loss:  2.8906619548797607
+
+Current loss:  3.3202171325683594
+
+Current loss:  3.387827157974243
+
+Current loss:  3.19751238822937
+
+Current loss:  2.421814203262329
+
+Current loss:  3.4870448112487793
+
+Current loss:  2.4190785884857178
+
+Current loss:  2.8199727535247803
+
+Current loss:  3.604248523712158
+
+Current loss:  2.359302282333374
+
+Current loss:  3.0057175159454346
+
+Current loss:  3.5467567443847656
+
+Current loss:  2.4963271617889404
+
+Current loss:  2.8893373012542725
+
+Current loss:  2.9220216274261475
+
+Current loss:  2.887834072113037
+
+Current loss:  2.553966760635376
+
+Current loss:  3.5035953521728516
+
+Current loss:  3.050356388092041
+
+Current loss:  2.911231279373169
+
+Current loss:  2.855245351791382
+
+Current loss:  3.193481922149658
+
+Current loss:  3.428330898284912
+
+Current loss:  2.8412060737609863
+
+Current loss:  2.350619077682495
+
+Current loss:  3.143695116043091
+
+Current loss:  3.4543771743774414
+
+Current loss:  3.047170877456665
+
+Current loss:  2.2023658752441406
+
+Current loss:  2.8601574897766113
+
+Current loss:  2.2165372371673584
+
+Current loss:  2.464557409286499
+
+Current loss:  2.8110458850860596
+
+Current loss:  2.2264244556427
+
+Current loss:  2.914609432220459
+
+Current loss:  2.831563711166382
+
+Current loss:  3.1240103244781494
+
+Current loss:  2.839729070663452
+
+Current loss:  3.3042654991149902
+
+Current loss:  2.8379921913146973
+Epoch 10 loss: 3.079900633893889, acc: 0.9998907488548936, f1: 0.9998893988856532
+M 5 Way K 5 Shot
+dataset torch.Size([25, 16, 9]) torch.Size([25]) (828470, 16, 9) (828470,) (array([0, 1, 2, 3, 4]), array([512595,  64091,  94406, 103278,  54100]))
+Epochs:  11%|█         | 11/100 [8:48:56<72:32:25, 2934.22s/it]Validation loss: 4.1659942504097955, acc: 0.9999855189990732, f1: 0.9999927024877219
+
+Current loss:  3.2686517238616943
+
+Current loss:  2.71675443649292
+
+Current loss:  2.877657175064087
+
+Current loss:  3.0925612449645996
+
+Current loss:  3.34928035736084
+
+Current loss:  2.8347976207733154
+
+Current loss:  2.5501580238342285
+
+Current loss:  3.456733226776123
+
+Current loss:  2.355011463165283
+
+Current loss:  2.8749570846557617
+
+Current loss:  2.842191696166992
+
+Current loss:  2.9125211238861084
+
+Current loss:  3.314929723739624
+
+Current loss:  3.475717306137085
+
+Current loss:  3.4226551055908203
+
+Current loss:  3.1640946865081787
+
+Current loss:  3.4177746772766113
+
+Current loss:  2.431039333343506
+
+Current loss:  3.5234286785125732
+
+Current loss:  3.3286707401275635
+
+Current loss:  3.171865940093994
+
+Current loss:  3.1242458820343018
+
+Current loss:  2.862863779067993
+
+Current loss:  3.3387272357940674
+
+Current loss:  2.6996679306030273
+
+Current loss:  2.9034693241119385
+
+Current loss:  3.325646162033081
+
+Current loss:  2.822392225265503
+
+Current loss:  3.4357731342315674
+
+Current loss:  3.3998911380767822
+
+Current loss:  3.4471378326416016
+
+Current loss:  2.5153708457946777
+
+Current loss:  2.7906718254089355
+
+Current loss:  3.016197681427002
+
+Current loss:  2.725482702255249
+
+Current loss:  3.0845236778259277
+
+Current loss:  2.9982128143310547
+
+Current loss:  2.781770706176758
+
+Current loss:  3.1222455501556396
+
+Current loss:  2.9734225273132324
+
+Current loss:  2.790037155151367
+
+Current loss:  2.8472659587860107
+
+Current loss:  2.4839227199554443
+
+Current loss:  3.4982802867889404
+
+Current loss:  2.719817638397217
+
+Current loss:  2.722656726837158
+
+Current loss:  2.4786908626556396
+
+Current loss:  2.848585367202759
+
+Current loss:  2.2248096466064453
+
+Current loss:  3.297883987426758
+
+Current loss:  2.464406728744507
+
+Current loss:  2.8340096473693848
+
+Current loss:  2.5323970317840576
+
+Current loss:  3.253629207611084
+
+Current loss:  2.895925998687744
+
+Current loss:  3.134734869003296
+
+Current loss:  2.950087308883667
+
+Current loss:  2.8813180923461914
+
+Current loss:  2.2261579036712646
+
+Current loss:  2.9295973777770996
+
+Current loss:  3.444417953491211
+
+Current loss:  2.9672601222991943
+
+Current loss:  3.533353090286255
+
+Current loss:  2.821880578994751
+
+Current loss:  2.7433412075042725
+
+Current loss:  3.2318148612976074
+
+Current loss:  3.491046905517578
+
+Current loss:  6.516693115234375
+
+Current loss:  3.307915687561035
+
+Current loss:  2.8145029544830322
+
+Current loss:  3.4369540214538574
+
+Current loss:  3.3610997200012207
+
+Current loss:  3.5058045387268066
+
+Current loss:  3.1186530590057373
+
+Current loss:  2.22175669670105
+
+Current loss:  2.882131576538086
+
+Current loss:  3.434549331665039
+
+Current loss:  2.8558382987976074
+
+Current loss:  2.580512523651123
+
+Current loss:  2.5366952419281006
+
+Current loss:  3.1969738006591797
+
+Current loss:  3.238396167755127
+
+Current loss:  3.339651584625244
+
+Current loss:  3.279162645339966
+
+Current loss:  3.5058162212371826
+
+Current loss:  2.2051913738250732
+Epoch 11 loss: 3.0752602858048306, acc: 0.9998517305785678, f1: 0.9998421835598472
+M 5 Way K 5 Shot
+dataset torch.Size([25, 16, 9]) torch.Size([25]) (828470, 16, 9) (828470,) (array([0, 1, 2, 3, 4]), array([512595,  64091,  94406, 103278,  54100]))
+Epochs:  12%|█▏        | 12/100 [9:34:42<70:19:23, 2876.85s/it]Validation loss: 4.2267295320644624, acc: 0.9999758649984554, f1: 0.9999878374795367
+
+Current loss:  3.2304532527923584
+
+Current loss:  2.831120729446411
+
+Current loss:  2.931109666824341
+
+Current loss:  2.8508553504943848
+
+Current loss:  3.479552745819092
+
+Current loss:  2.3454554080963135
+
+Current loss:  2.6417198181152344
+
+Current loss:  3.134714126586914
+
+Current loss:  2.8573102951049805
+
+Current loss:  2.911710739135742
+
+Current loss:  3.294593334197998
+
+Current loss:  2.908633232116699
+
+Current loss:  3.474971055984497
+
+Current loss:  3.2016286849975586
+
+Current loss:  2.998845338821411
+
+Current loss:  2.8651347160339355
+
+Current loss:  3.4918222427368164
+
+Current loss:  2.7874698638916016
+
+Current loss:  3.4930899143218994
+
+Current loss:  3.2811551094055176
+
+Current loss:  3.2097487449645996
+
+Current loss:  2.476294755935669
+
+Current loss:  3.16630220413208
+
+Current loss:  3.4904446601867676
+
+Current loss:  2.8463823795318604
+
+Current loss:  2.9265122413635254
+
+Current loss:  2.7980425357818604
+
+Current loss:  2.8898167610168457
+
+Current loss:  3.468886375427246
+
+Current loss:  3.178304433822632
+
+Current loss:  3.4685938358306885
+
+Current loss:  3.4584453105926514
+
+Current loss:  2.875298500061035
+
+Current loss:  2.864560842514038
+
+Current loss:  2.353438138961792
+
+Current loss:  2.871845245361328
+
+Current loss:  2.210876226425171
+
+Current loss:  3.4503722190856934
+
+Current loss:  3.1801934242248535
+
+Current loss:  3.4510304927825928
+
+Current loss:  2.7924203872680664
+
+Current loss:  2.882232189178467
+
+Current loss:  2.848844051361084
+
+Current loss:  2.8407745361328125
+
+Current loss:  2.865739345550537
+
+Current loss:  2.4822168350219727
+
+Current loss:  2.210477113723755
+
+Current loss:  2.8515024185180664
+
+Current loss:  2.2260570526123047
+
+Current loss:  2.829411506652832
+
+Current loss:  3.327186346054077
+
+Current loss:  3.2261674404144287
+
+Current loss:  2.869094133377075
+
+Current loss:  2.3442094326019287
+
+Current loss:  2.2291300296783447
+
+Current loss:  2.8492398262023926
+
+Current loss:  2.880891799926758
+
+Current loss:  3.2720019817352295
+
+Current loss:  3.342890501022339
+
+Current loss:  2.452941656112671
+
+Current loss:  3.4859118461608887
+
+Current loss:  2.8500242233276367
+
+Current loss:  3.385939121246338
+
+Current loss:  3.281132936477661
+
+Current loss:  2.8412442207336426
+
+Current loss:  2.8767545223236084
+
+Current loss:  2.9373648166656494
+
+Current loss:  3.448357582092285
+
+Current loss:  3.4623727798461914
+
+Current loss:  2.4033260345458984
+
+Current loss:  2.865756034851074
+
+Current loss:  3.4655921459198
+
+Current loss:  2.5952720642089844
+
+Current loss:  2.9603404998779297
+
+Current loss:  3.2021403312683105
+
+Current loss:  2.7601828575134277
+
+Current loss:  2.79434871673584
+
+Current loss:  2.8955111503601074
+
+Current loss:  3.178947687149048
+
+Current loss:  3.4955482482910156
+
+Current loss:  2.215787172317505
+
+Current loss:  2.8750197887420654
+
+Current loss:  3.475043535232544
+
+Current loss:  3.5064005851745605
+
+Current loss:  3.5167503356933594
+
+Current loss:  2.542642116546631
+Epoch 12 loss: 2.998063725595185, acc: 0.9999804908688141, f1: 0.9999802937880895
+M 5 Way K 5 Shot
+dataset torch.Size([25, 16, 9]) torch.Size([25]) (828470, 16, 9) (828470,) (array([0, 1, 2, 3, 4]), array([512595,  64091,  94406, 103278,  54100]))
+Epochs:  13%|█▎        | 13/100 [10:22:26<69:25:51, 2873.00s/it]Validation loss: 4.1817888029202805, acc: 0.9998503629904232, f1: 0.9999245923731266
+
+Current loss:  3.473618745803833
+
+Current loss:  2.8461005687713623
+
+Current loss:  2.504350423812866
+
+Current loss:  3.23469614982605
+
+Current loss:  2.2101359367370605
+
+Current loss:  2.8595855236053467
+
+Current loss:  2.549772024154663
+
+Current loss:  3.2805016040802
+
+Current loss:  3.476118326187134
+
+Current loss:  2.4788079261779785
+
+Current loss:  2.8724563121795654
+
+Current loss:  2.878312349319458
+
+Current loss:  2.3413658142089844
+
+Current loss:  2.214372158050537
+
+Current loss:  2.5272622108459473
+
+Current loss:  3.470111608505249
+
+Current loss:  3.151421308517456
+
+Current loss:  2.8402767181396484
+
+Current loss:  3.4323935508728027
+
+Current loss:  3.218029260635376
+
+Current loss:  2.892131805419922
+
+Current loss:  2.22062611579895
+
+Current loss:  2.4659345149993896
+
+Current loss:  2.860757827758789
+
+Current loss:  3.100825309753418
+
+Current loss:  3.4521212577819824
+
+Current loss:  3.164797306060791
+
+Current loss:  3.469693183898926
+
+Current loss:  3.068368911743164
+
+Current loss:  3.4627139568328857
+
+Current loss:  3.4566824436187744
+
+Current loss:  2.643948793411255
+
+Current loss:  2.199040651321411
+
+Current loss:  3.3312206268310547
+
+Current loss:  2.982131004333496
+
+Current loss:  2.8670029640197754
+
+Current loss:  2.855255365371704
+
+Current loss:  2.222156524658203
+
+Current loss:  2.9314322471618652
+
+Current loss:  2.861203908920288
+
+Current loss:  3.4625844955444336
+
+Current loss:  3.229670763015747
+
+Current loss:  3.46675968170166
+
+Current loss:  2.8612594604492188
+
+Current loss:  2.8014626502990723
+
+Current loss:  2.918109178543091
+
+Current loss:  3.1682190895080566
+
+Current loss:  3.2808825969696045
+
+Current loss:  2.8675365447998047
+
+Current loss:  3.0309627056121826
+
+Current loss:  2.8737003803253174
+
+Current loss:  2.465589761734009
+
+Current loss:  3.473193407058716
+
+Current loss:  2.85298752784729
+
+Current loss:  2.848249912261963
+
+Current loss:  2.848428249359131
+
+Current loss:  2.8636972904205322
+
+Current loss:  3.478355646133423
+
+Current loss:  3.028193473815918
+
+Current loss:  2.8397858142852783
+
+Current loss:  2.351741075515747
+
+Current loss:  2.926173686981201
+
+Current loss:  3.4781973361968994
+
+Current loss:  2.2044811248779297
+
+Current loss:  2.5518336296081543
+
+Current loss:  3.1010499000549316
+
+Current loss:  3.2906718254089355
+
+Current loss:  3.281940221786499
+
+Current loss:  2.992264747619629
+
+Current loss:  2.858306407928467
+
+Current loss:  2.847506284713745
+
+Current loss:  2.867513418197632
+
+Current loss:  2.46435809135437
+
+Current loss:  3.156074047088623
+
+Current loss:  2.485135555267334
+
+Current loss:  2.8648743629455566
+
+Current loss:  2.4604644775390625
+
+Current loss:  2.878028631210327
+
+Current loss:  3.505666971206665
+
+Current loss:  3.097355365753174
+
+Current loss:  3.5612714290618896
+
+Current loss:  2.519047498703003
+
+Current loss:  2.3734066486358643
+
+Current loss:  2.9884817600250244
+
+Current loss:  2.8430583477020264
+
+Current loss:  3.2733922004699707
+Epoch 13 loss: 2.995481847028298, acc: 0.9999765890425769, f1: 0.9999763525457077
+M 5 Way K 5 Shot
+dataset torch.Size([25, 16, 9]) torch.Size([25]) (828470, 16, 9) (828470,) (array([0, 1, 2, 3, 4]), array([512595,  64091,  94406, 103278,  54100]))
+Epochs:  14%|█▍        | 14/100 [11:07:31<67:25:08, 2822.19s/it]
