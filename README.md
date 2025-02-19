@@ -1,4 +1,4 @@
-# FewShotMulticlassIDS
+# FewShot Multiclass IDS in IVN
 
 This code performs a few-shot multi-class classification of the intrusion detection dataset in the in-vehicle network. Using the CarHacking (CHRL) dataset and the ROAD dataset.
 
