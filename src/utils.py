@@ -132,8 +132,7 @@ def plot_his(train_his, test_his, name='Loss', custom_name="1"):
     plt.legend()
 
     # Create directory if it doesn't exist
-    os.makedirs('/home/ntmduy/LearningToCompare_FSL/train', exist_ok=True)
-    plt.savefig(f'/home/ntmduy/LearningToCompare_FSL/train/{name}_history_{custom_name}.png')
+    plt.savefig(f'/home/ntmduy/FewShotCanBus/log/loss/{name}_history_{custom_name}.png')
 
 def print_result(label_y, pre_y):
     accuracy = accuracy_score(label_y, pre_y)

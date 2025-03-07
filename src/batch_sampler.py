@@ -3,6 +3,7 @@ import numpy as np
 import torch
 import random
 from collections import defaultdict
+from itertools import cycle, islice
 
 class FewShotBatchSampler(object):
 
@@ -191,3 +192,114 @@ class FewShotBatchSamplerModified(object):
     def __len__(self):
         return self.iterations
     
+class FewShotBatchSamplerModifiedV2:
+    def __init__(self, dataset_targets, N_way, K_support, K_query=5, shuffle=True, shuffle_once=False):
+        self.dataset_targets = dataset_targets
+        self.N_way = N_way
+        self.K_support = K_support
+        self.K_query = K_query
+        self.K_shot = K_support + K_query
+        self.shuffle = shuffle
+        self.shuffle_once = shuffle_once
+
+        self.classes = torch.unique(self.dataset_targets).tolist()
+        self.indices_per_class = {
+            c: torch.where(self.dataset_targets == c)[0].tolist()
+            for c in self.classes
+        }
+
+        # min_samples = min(len(indices) for indices in self.indices_per_class.values())
+        self.iterations = max(len(indices) for indices in self.indices_per_class.values()) // self.K_shot
+
+        # Shuffle ONLY ONCE if specified
+        if self.shuffle_once:
+            for c in self.classes:
+                random.shuffle(self.indices_per_class[c])
+
+    def __iter__(self):
+        if self.shuffle:
+            for c in self.classes:
+                random.shuffle(self.indices_per_class[c])
+
+        # Cycle through classes with fewer samples repeatedly
+        class_iterators = {
+            c: cycle(self.indices_per_class[c])
+            for c in self.classes
+        }
+
+        for _ in range(self.iterations):
+            selected_classes = random.sample(self.classes, self.N_way)
+            batch = []
+
+            for c in selected_classes:
+                indices_iter = class_iterators[c]
+
+                support = list(islice(indices_iter, self.K_support))
+                query = list(islice(indices_iter, self.K_query))
+
+                batch.extend(support + query)
+
+            yield batch
+
+    def __len__(self):
+            return self.iterations
+
+from torch.utils.data import Sampler
+class StratifiedFewShotBatchSamplerBenignCycled(Sampler):
+    def __init__(self, dataset_targets, N_way, K_support, K_query):
+        super().__init__(dataset_targets)
+        self.targets = dataset_targets
+        self.N_way = N_way
+        self.K_support = K_support
+        self.K_query = K_query
+        self.K_shot = K_support + K_query
+        
+        self.classes = torch.unique(self.targets).tolist()
+        
+        # Separate benign class explicitly
+        self.benign_class = 0
+        self.other_classes = [cls for cls in self.classes if cls != self.benign_class]
+        
+        # Indices per class
+        self.indices_benign = (self.targets == self.benign_class).nonzero(as_tuple=True)[0].tolist()
+        self.indices_other = {
+            cls: (self.targets == cls).nonzero(as_tuple=True)[0].tolist()
+            for cls in self.other_classes
+        }
+        
+        # Determine episodes per epoch from LARGEST non-benign class
+        self.max_samples_non_benign = max(len(indices) for indices in self.indices_other.values())
+        self.episodes_per_epoch = self.max_samples_non_benign // self.K_shot
+
+    def __iter__(self):
+        # Shuffle once per epoch
+        shuffled_indices = {
+            cls: random.sample(indices, len(indices))
+            for cls, indices in self.indices_other.items()
+        }
+
+        # Cycle smaller classes explicitly
+        iterators = {
+            cls: cycle(shuffled_indices[cls])
+            for cls in self.other_classes
+        }
+
+        for episode in range(self.episodes_per_epoch):
+            batch_indices = []
+
+            # Randomly sample benign class
+            benign_samples = random.sample(self.indices_benign, self.K_shot)
+            batch_indices.extend(benign_samples)
+
+            # Select N_way - 1 other classes randomly
+            selected_classes = random.sample(self.other_classes, self.N_way - 1)
+
+            for cls in selected_classes:
+                cls_iterator = iterators[cls]
+                cls_samples = list(islice(cls_iterator, self.K_shot))
+                batch_indices.extend(cls_samples)
+
+            yield batch_indices
+
+    def __len__(self):
+        return self.episodes_per_epoch

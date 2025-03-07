@@ -44,9 +44,9 @@ def cosine_dist(x, y):
 
 METRICS = {
     'cosine': lambda gallery, query: 1. - F.cosine_similarity(query[:, None, :], gallery[None, :, :], dim=2),
-    'euclidean': lambda gallery, query: euclidean_dist(query, gallery),
-    'l1': lambda gallery, query: torch.norm((query[:, None, :] - gallery[None, :, :]), p=1, dim=2),
-    'l2': lambda gallery, query: torch.norm((query[:, None, :] - gallery[None, :, :]), p=2, dim=2),
+    'euclidean': lambda gallery, query: torch.cdist(query, gallery, p=2),
+    'l1': lambda gallery, query: torch.cdist(query, gallery, p=1),
+    'l2': lambda gallery, query: torch.cdist(query, gallery, p=2)
 }
 
 def calculate_prototypes(features, targets):
@@ -69,21 +69,56 @@ def compute_logits(x, centroids, sigma):
     logits = -distances / (2 * sigma ** 2)
     return logits
 
-def classify_feats(prototypes, classes, feats, targets, metric='euclidean', sigma=1.0):
-    # Classify new examples with prototypes and return classification error
-    # dist = torch.pow(prototypes[None, :] - feats[:, None], 2).sum(dim=2)  # Squared euclidean distance
-    # Calculate distances from query embeddings to prototypes
-    # dist = torch.cdist(feats, prototypes)
-    # dist = euclidean_dist(feats, prototypes)
+def f1_score_gpu_missing_classes(preds, targets, classes, average='macro', eps=1e-8):
+    preds = preds.view(-1)
+    targets = targets.view(-1)
 
+    f1_per_class = []
+    valid_classes = 0
+
+    for cls in classes:
+        pred_cls = (preds == cls)
+        target_cls = (targets == cls)
+
+        true_positive = torch.sum(pred_cls & target_cls).float()
+        false_positive = torch.sum(pred_cls & ~target_cls).float()
+        false_negative = torch.sum(~pred_cls & target_cls).float()
+
+        # Skip class clearly if no samples present
+        if torch.sum(target_cls) == 0:
+            continue
+
+        precision = true_positive / (true_positive + false_positive + eps)
+        recall = true_positive / (true_positive + false_negative + eps)
+
+        f1 = 2 * precision * recall / (precision + recall + eps)
+        f1_per_class.append(f1)
+        valid_classes += 1
+
+    if valid_classes == 0:
+        return torch.tensor(0.0).to(preds.device)
+
+    f1_per_class = torch.stack(f1_per_class)
+
+    if average == 'macro':
+        return f1_per_class.mean()
+    else:
+        raise ValueError("Only 'macro' average supported")
+    
+def classify_feats(prototypes, classes, feats, targets, metric='euclidean', sigma=1.0):
+    # Keep everything on GPU for faster computation
     dist = METRICS[metric](prototypes, feats)
     preds = F.log_softmax(-dist, dim=1)
     labels = (classes[None, :] == targets[:, None]).long().argmax(dim=-1)
 
-    with torch.no_grad():
-        acc = (preds.argmax(dim=1) == labels).float().mean()
-        f1 = f1_score(labels.cpu().numpy(), preds.argmax(dim=1).cpu().numpy(), average='weighted')
-    return preds, labels, acc, f1
+    # Compute metrics on GPU
+    pred_labels = preds.argmax(dim=1)
+    acc = (pred_labels == labels).float().mean()
+    
+    # Calculate F1 score on GPU
+    f1_score = f1_score_gpu_missing_classes(pred_labels, labels, classes)
+    
+    return preds, labels, acc, f1_score
 
 def proto_loss_2(query, support, n_classes, n_query):
     query_samples = query.to('cpu')

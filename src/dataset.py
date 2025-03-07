@@ -40,6 +40,10 @@ class RoadDataset_v3(data.Dataset):
         #/home/ntmduy/can-train-and-test/set_01/processed/timete-set_01-2d-dec-can_train_and_test_1_ss_3_no-16-16.npy
         
         if (mode == 'train'):
+            #xtrain-road-2d-dec-fab_ss_11_no_split_fuzzing_90test-16-1.npy
+            #/home/ntmduy/CANET/CICIDS2017/data/road/timetr-road-2d-dec-fab_ss_11_2d_no_split_90test_fuzzing-16-1.npy
+            
+            #road-2d-dec-fab_ss_11_2d_no_split_90test_fuzzing-16-1.npy
             self.x = np.load(os.path.join(path, f'xtrain-{folder}-2d-dec-{self.road_type}-{self.ws}-{s}.npy')).astype(np.float32)
             self.y = np.load(os.path.join(path, f'ytrain-{folder}-2d-dec-{self.road_type}-{self.ws}-{s}.npy')).astype(np.int64)  
             if (self.with_time):
