@@ -75,7 +75,7 @@ class  Conv1dAnomalyTransformer(nn.Module):
             nn.Linear(self.win_size*self.transformer_out, self.emb_size),
         ) if(self.use_emb) else None
     
-    def forward(self, x, time=None, device='cuda:0', classifier = False):
+    def forward(self, x, time=None, device='cuda:0'):
         # CNN
         ae_out = torch.empty((x.shape[0], self.transformer_out, 0)).to(device)
 
