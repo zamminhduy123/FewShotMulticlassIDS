@@ -112,11 +112,10 @@ def classify_feats(prototypes, classes, feats, targets, metric='euclidean', sigm
     labels = (classes[None, :] == targets[:, None]).long().argmax(dim=-1)
 
     # Compute metrics on GPU
-    pred_labels = preds.argmax(dim=1)
-    acc = (pred_labels == labels).float().mean()
-    
-    # Calculate F1 score on GPU
-    f1_score = f1_score_gpu_missing_classes(pred_labels, labels, classes)
+    with torch.no_grad():
+        pred_labels = preds.argmax(dim=1)
+        acc = (pred_labels == labels).float().mean()
+        f1_score = f1_score_gpu_missing_classes(pred_labels, labels, classes)
     
     return preds, labels, acc, f1_score
 

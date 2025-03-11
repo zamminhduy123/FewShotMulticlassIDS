@@ -56,14 +56,55 @@ def create_prototypes_and_queries_with_time(features, targets, time, M, K):
 
     return prototype_features, prototype_targets, prototype_time, query_features, query_targets, query_time
 
+def get_prototypes_indexes(targets, M, K):
+    """
+    Get prototype and query indexes from target tensor.
+    
+    Args:
+        targets (Tensor): [batch_size] (labels)
+        M (int): number of classes
+        K (int): num of support samples per class
+    
+    Returns:
+        proto_idxs: Tensor indexes of prototype (support) samples
+        query_idxs: Tensor indexes of query samples
+    """
+    class_dict = defaultdict(list)
+    N = len(targets)
+
+    for i in range(N):
+        class_dict[targets[i].item()].append(i)
+    
+    # Check for enough classes explicitly
+    available_classes = [cls for cls, idxs in class_dict.items() if len(idxs) >= K+1]
+    assert len(available_classes := list(class_dict.keys())) >= M, f"Need {M} classes, but found {len(class_dict)}"
+
+    proto_idxs, query_idxs = [], []
+
+    sampled_classes = random.sample(available_classes, M)
+
+    for cls in sampled_classes:
+        indices = class_dict[cls]
+        random.shuffle(indices)
+        
+        assert len(indices) >= K + 1, f"Not enough samples in class {cls}"
+
+        proto_idxs.extend(indices[:K])
+        query_idxs.extend(indices[K:])
+
+    # Convert explicitly to PyTorch tensors
+    proto_idxs = torch.tensor(proto_idxs, device=targets.device)
+    query_idxs = torch.tensor(query_idxs).to(targets.device)
+
+    return proto_idxs, query_idxs
 
 def init_optim(model, type="Adam", lr=0.0001):
     if (type == "Adam"):
-        return optim.Adam(model.parameters(), lr=0.0001)
+        return optim.Adam(model.parameters(), lr=lr)
     elif (type == "AdamW"):
-        return optim.AdamW(model.parameters(), lr=0.0001)
+        return optim.AdamW(model.parameters(), lr=lr)
     else:
-        return optim.SGD(model.parameters(), lr=0.0001, momentum=0.9)
+        return optim.SGD(model.parameters(), lr=lr, momentum=0.9)
     
 
 def cal_model_size(model):

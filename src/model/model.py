@@ -114,3 +114,77 @@ class  Conv1dAnomalyTransformer(nn.Module):
             prototypes.append(prototype)
         prototypes = torch.stack(prototypes)
         return prototypes
+
+
+class OnlyAnomalyTransformer(nn.Module):
+    d_model = 8
+    transformer_out = 16
+    pr = True
+    use_emb = False
+
+    emb_size = 16
+    win_size = 16
+    def __init__(self, d_model = 16, layer = 6, num_class=6, with_time = False, use_emb=True, add_norm=False, in_dim=11, emb_size=128, win_size=15):
+        print(f"init Conv1dTransformerEncoder with {num_class} classes")
+        super(OnlyAnomalyTransformer, self).__init__()
+        self.transformer_out = d_model
+        self.layer = layer
+        self.use_emb = use_emb
+        self.emb_size = emb_size
+        self.win_size = win_size
+
+        self.encoder = AnomalyTransformer(win_size=self.win_size, enc_in=self.transformer_out, c_out=self.transformer_out, d_model=self.transformer_out, n_heads=self.transformer_out, e_layers=self.layer, d_ff=512, dropout=0.5, output_attention=True, use_tse=with_time, max_time_position=10000)
+
+        self.with_time = with_time
+        self.add_norm = add_norm
+        self.num_class = num_class
+
+        self.cnn = nn.Sequential(
+            nn.Linear(in_dim, 32),
+            nn.ReLU(),
+            nn.Conv1d(1, 32, kernel_size=3, stride=1, padding=0),
+            nn.BatchNorm1d(32),
+            nn.ReLU(),
+            nn.Dropout(0.3),
+            nn.Flatten(start_dim=1),
+            nn.Linear(960, self.transformer_out)
+        )
+
+        self.emb = nn.Sequential(
+            nn.Linear(self.win_size*self.transformer_out, self.win_size*self.transformer_out),
+            nn.ReLU(inplace=True),
+            nn.Dropout(0.4),
+            nn.BatchNorm1d(self.win_size*self.transformer_out),
+            nn.Linear(self.win_size*self.transformer_out, self.emb_size),
+        ) if(self.use_emb) else None
+    
+    def forward(self, x, time=None, device='cuda:0'):
+        # CNN
+        # Transformer
+        if (self.with_time):
+            x = self.encoder(x, time)
+        else:
+            x = self.encoder(x)
+
+        x = self.emb(x.view(x.size(0), -1)) if (self.use_emb) else torch.sum(x, 1)
+        x = F.normalize(x, p=2, dim=-1) if (self.add_norm) else x
+        
+        return x
+    
+    def calculate_attention(self, features):
+        max_pool = torch.max(features, dim=1, keepdim=True)[0]
+        avg_pool = torch.mean(features, dim=1, keepdim=True)
+        combined = torch.cat([max_pool, avg_pool], dim=1)
+        attention_map = torch.sigmoid(self.fc_att(combined))
+        return attention_map
+    
+    def calculate_prototype(self, support_features):
+        prototypes = []
+        for i in range(self.num_class):
+            class_features = support_features[i]
+            attention_map = self.calculate_attention(class_features)
+            weighted_features = class_features * attention_map
+            prototype = weighted_features.mean(dim=0)
+            prototypes.append(prototype)
+        prototypes = torch.stack(prototypes)
+        return prototypes
