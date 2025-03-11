@@ -10,13 +10,69 @@ For the ROAD dataset, process the log file into the CSV using (remember to chang
 run the notebook ./src/preprocess.ipynb
 ```
 
-To process CSV dataset into windows of messages (Adjust config at the end of the file)
+## Preprocess
+
+To process CSV dataset into windows of messages
+
+> Please update feature in `process_data` function in `data_windowing.py` if you want more features
+
+### Process Car Hacking dataset
 
 ```
-python ./src/data_splitting/data_windowing.py
+python ./src/data_splitting/data_windowing.py \
+    --chd True \
+    --is-mar False \
+    --process-type <your_process_type_name> \
+    --window-size <your_window_size> \
+    --window-size <your_step> \
+    --feature <number_of_feature> \
+    --test-size 0.9 \
+    --val-split True \
+    --val-size 0.5 \
+    --extra 90test_50val \
+    --car-hacking-path <your_chd_csv_path> \
+    --save-path <your_save_path> \
 ```
 
-To run the training
+### Process ROAD Fabrication dataset
+
+```
+python ./src/data_splitting/data_windowing.py \
+    --chd True \
+    --is-mar False \
+    --process-type <your_process_type_name> \
+    --window-size <your_window_size> \
+    --window-size <your_step> \
+    --feature <number_of_feature> \
+    --test-size 0.9 \
+    --val-split True \
+    --val-size 0.5 \
+    --extra 90test_50val \
+    --road-data-path <your_road_csv_path> \
+    --save-path <your_save_path> \
+```
+
+### Process ROAD Masquerade dataset
+
+```
+python ./src/data_splitting/data_windowing.py \
+    --chd True \
+    --is-mar True \
+    --process-type <your_process_type_name> \
+    --window-size <your_window_size> \
+    --window-size <your_step> \
+    --feature <number_of_feature> \
+    --test-size 0.9 \
+    --val-split True \
+    --val-size 0.5 \
+    --extra 90test_50val \
+    --road-data-path <your_road_csv_path> \
+    --save-path <your_save_path> \
+```
+
+## Training
+
+Please change the path to your dataset in `dataset.py`
 
 ```bash
 python ./src/main.py \
@@ -25,16 +81,16 @@ python ./src/main.py \
     --d-model 10 \
     --layers 10 \
     --num-class 12 \
-    --norm \
+    --norm True\
     --batch-size 128 \
-    --epochs 600 \
+    --epochs 300 \
     --optimizer AdamW \
     --scheduler CosineWarmup100 \
     --lr 0.0001 \
     --window-size 16 \
     --step-size 1 \
     --features 11 \
-    --split ss_11_2d_no \
+    --split <your_split_name> \
     --train-shot 5 \
     --test-shot 0 \
     --circle-loss \
