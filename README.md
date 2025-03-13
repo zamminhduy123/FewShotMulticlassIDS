@@ -74,6 +74,8 @@ python ./src/data_splitting/data_windowing.py \
 
 Please change the path to your dataset in `dataset.py`
 
+**Note**: If train-shot == 0 & test-shot == 0 the code will perform "Episodic training".
+
 ```bash
 python ./src/main.py \
     --dataset 1 \
@@ -85,13 +87,13 @@ python ./src/main.py \
     --batch-size 128 \
     --epochs 300 \
     --optimizer AdamW \
-    --scheduler CosineWarmup100 \
+    --scheduler-warmup 100 \
     --lr 0.0001 \
     --window-size 16 \
     --step-size 1 \
     --features 11 \
     --split <your_split_name> \
-    --train-shot 5 \
+    --train-shot 0 \
     --test-shot 0 \
     --circle-loss \
     --ood-loss \
