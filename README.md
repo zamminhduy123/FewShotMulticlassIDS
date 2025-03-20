@@ -87,11 +87,11 @@ python ./src/main.py \
     --batch-size 128 \
     --epochs 300 \
     --optimizer AdamW \
-    --scheduler-warmup 100 \
+    --scheduler-warmup 50 \
     --lr 0.0001 \
     --window-size 16 \
     --step-size 1 \
-    --features 11 \
+    --features 9 \
     --split <your_split_name> \
     --train-shot 0 \
     --test-shot 0 \
