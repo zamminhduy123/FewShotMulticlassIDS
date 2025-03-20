@@ -108,13 +108,22 @@ def f1_score_gpu_missing_classes(preds, targets, classes, average='macro', eps=1
 def classify_feats(prototypes, classes, feats, targets, metric='euclidean', sigma=1.0):
     # Keep everything on GPU for faster computation
     dist = METRICS[metric](prototypes, feats)
+    
+    # Apply log softmax to distances (or logits)
     preds = F.log_softmax(-dist, dim=1)
+    
+    # Since targets are indices within the selected classes, this maps them to the full class set
     labels = (classes[None, :] == targets[:, None]).long().argmax(dim=-1)
 
     # Compute metrics on GPU
     with torch.no_grad():
+        # Predicted labels are the index of the maximum log probability
         pred_labels = preds.argmax(dim=1)
-        acc = (pred_labels == labels).float().mean()
+        
+        # Compute accuracy: compare predicted labels with true labels (targets)
+        acc = (pred_labels == labels).float().mean()  # Accuracy is the mean of correct predictions
+
+        # Compute F1 score
         f1_score = f1_score_gpu_missing_classes(pred_labels, labels, classes)
     
     return preds, labels, acc, f1_score

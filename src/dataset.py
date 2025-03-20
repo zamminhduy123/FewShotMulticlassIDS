@@ -20,8 +20,8 @@ class RoadDataset_v3(data.Dataset):
     road_type = 'fab_raw_split'
 
     # Change these paths to the location of the dataset on your machine
-    road_path = '/home/ntmduy/CANET/CICIDS2017/data/road/'
-    # road_path = "/home/ntmduy/FewShotCanBus/test_Data/road/"
+    # road_path = '/home/ntmduy/CANET/CICIDS2017/data/road/'
+    road_path = "/home/ntmduy/FewShotCanBus/test_Data/road/"
     can_train_and_test_path = '/home/ntmduy/can-train-and-test/set_01/processed/'
     ch_path = '/home/ntmduy/CANET/CICIDS2017/data/car-hacking/'
     

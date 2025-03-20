@@ -17,11 +17,12 @@ def parse_args():
     train_group.add_argument('--batch-size', type=int, default=128, help='Batch size')
     train_group.add_argument('--epochs', type=int, default=300, help='Number of epochs')
     train_group.add_argument('--grad-accum-steps', type=int, default=1, help='Gradient accumulation steps')
-    train_group.add_argument('--lr', type=float, default=0.0001, help='Learning rate')
+    train_group.add_argument('--lr', type=float, default=0.0002, help='Learning rate')
     train_group.add_argument('--optimizer', type=str, default='AdamW', choices=['AdamW', 'Adam', 'SGD'], help='Optimizer type')
-    train_group.add_argument('--scheduler-warmup', type=int, default=70, help='Learning rate scheduler')
+    train_group.add_argument('--scheduler-warmup', type=int, default=50, help='Learning rate scheduler')
     train_group.add_argument('--debug', action='store_true', help='Enable debug mode')
     train_group.add_argument('--tqdm', action='store_true',  help='Show progress bar')
+    train_group.add_argument('--val-split', help='Have validation set', action=argparse.BooleanOptionalAction)
     
     # Dataset configuration
     data_group = parser.add_argument_group('Dataset Configuration')
@@ -30,12 +31,14 @@ def parse_args():
     data_group.add_argument('--step-size', type=int, default=1, help='Step size')
     data_group.add_argument('--features', type=int, default=11, help='Number of features')
     data_group.add_argument('--split', type=str, default='ss_11_2d_no', help='Data split version')
+    # data_split : ex: 90test50val
+    data_group.add_argument('--data-split', type=str, help='data split type')
     
     # Few-shot configuration
     fewshot_group = parser.add_argument_group('Few-shot Configuration')
     fewshot_group.add_argument('--train-shot', type=int, default=0, help='Number of training shots')
     fewshot_group.add_argument('--test-shot', type=int, default=0, help='Number of testing shots')
-    fewshot_group.add_argument('--use-kmeans', help='Use KMeans for prototype selection')
+    fewshot_group.add_argument('--use-kmeans', help='Use KMeans for prototype selection', action=argparse.BooleanOptionalAction)
     
     # Loss configuration
     loss_group = parser.add_argument_group('Loss Configuration')

@@ -8,9 +8,13 @@ import numpy as np
 import pandas as pd
 import torch
 import torch.nn as nn
-from sklearn.cluster import KMeans
+
 from torch.utils.data import DataLoader, Dataset
 from tqdm import tqdm
+
+# GPU AND CPU KMEANS
+from sklearn.cluster import KMeans
+from kmeans import kmeans as KMeans_GPU
 
 # Visualization
 import matplotlib.pyplot as plt
@@ -28,7 +32,7 @@ from loss.triplet_loss import TripletLoss
 from loss.center_loss import CenterLoss
 from model.model import Conv1dAnomalyTransformer, OnlyAnomalyTransformer
 from model.ConvNet import ConvNet
-from model.ResNet import ResNet
+from model.ResNet import ResNet, SupConResNet
 from scheduler import CosineWarmupScheduler
 import utils as utl
 
@@ -48,7 +52,6 @@ cl_loss = CircleLoss2(margin=0.5).to(device)
 embedding_dims = args.embedding_dims
 d_model = args.d_model
 layer = args.layers
-num_class = args.num_class
 
 # Training parameters
 batch_size = args.batch_size
@@ -86,7 +89,7 @@ if only_cl:
 # ============================= PATH CONFIGURATION =============================
 # Dataset split configuration
 split = args.split
-data_split = "90test50val"
+data_split = args.data_split
 road_type = f"fab_{split}_split_{data_split}" if DATASET == 1 else 'chd_ss_2_no_split_60test'
 
 # Training configuration string components
@@ -118,7 +121,7 @@ print("USE KMEANS", USE_KMEANS)
 # ============================= DATASET LOADING =============================
 N_WAY, K_support, K_query = None, None, None
 if EPISODIC_TRAIN:
-    N_WAY, K_support, K_query = 5, 5, 20
+    N_WAY, K_support, K_query = 5, 5, 15
 
 def create_dataloader(dataset, is_train=False):
     """Create dataloader with appropriate configuration."""
@@ -136,13 +139,13 @@ def create_dataloader(dataset, is_train=False):
             K_query=K_query,
             shuffle=is_train
         )
-        return DataLoader(dataset, batch_sampler=sampler, num_workers=8, pin_memory=True)
+        return DataLoader(dataset, batch_sampler=sampler, num_workers=4, pin_memory=True)
     else:
         return DataLoader(
             dataset,
-            batch_size=batch_size,
+            batch_size=256,
             shuffle=is_train,
-            num_workers=8,
+            num_workers=4,
             pin_memory=True
         )
 
@@ -159,10 +162,11 @@ tr_dataset = RoadDataset_v3(
     ws=ws,
     s=s
 )
+num_class = len(np.unique(tr_dataset.y))
 
 val_ds = RoadDataset_v3(
     dataset=DATASET,
-    mode='val',
+    mode='val' if args.val_split else 'test',
     road_type=road_type,
     with_time=True,
     embed=d_model,
@@ -229,6 +233,8 @@ def initialize_prototypes():
 # Initialize prototypes
 if (not EPISODIC_TRAIN):
     proto_x, proto_y, proto_t = initialize_prototypes()
+else:
+    proto_x, proto_y, proto_t = None, None, None
 
 # ============================= MODEL INITIALIZATION =============================
 def initialize_model():
@@ -249,7 +255,7 @@ def initialize_model():
     elif (MODEL_NAME == 'ConvNet'):
         model = ConvNet(x_dim=1, hid_dim=64, z_dim=64).to(device)
     elif (MODEL_NAME == "ResNet"):
-        model = ResNet().to(device)
+        model = SupConResNet().to(device)
     else:
         model = Conv1dAnomalyTransformer(
             d_model=d_model,
@@ -316,11 +322,23 @@ def select_support_set_kmeans(embeddings, labels, num_classes, k_shot, n_cluster
     for label in unique_labels[:num_classes]:
         class_indices = (labels == label).nonzero(as_tuple=True)[0]
         class_embeddings = embeddings[class_indices]
-        kmeans = KMeans(n_clusters=n_clusters).fit(class_embeddings.cpu().numpy())
-        cluster_centers = kmeans.cluster_centers_
+
+        if (torch.cuda.is_available()):
+            kmeans = KMeans_GPU(
+                X=class_embeddings, num_clusters=n_clusters, distance='euclidean', device=embeddings.device,
+                tqdm_flag=False,
+            )
+            cluster_centers = kmeans[1]
+        else:
+            kmeans = KMeans(n_clusters=n_clusters).fit(class_embeddings.cpu().numpy())
+            cluster_centers = kmeans.cluster_centers_ 
+
         selected_indices = []
         for center in cluster_centers:
-            center_idx = ((class_embeddings - torch.tensor(center).to(device)).norm(dim=1)).argmin().item()
+            if (torch.cuda.is_available()):
+                center_idx = ((class_embeddings - center.clone().detach().to(device)).norm(dim=1)).argmin().item()
+            else:
+                center_idx = ((class_embeddings - torch.tensor(center, device=device)).norm(dim=1)).argmin().item()
             selected_indices.append(class_indices[center_idx])
         selected_indices = random.sample(selected_indices, k_shot)
         for idx in selected_indices:
@@ -332,7 +350,7 @@ def select_support_set_kmeans(embeddings, labels, num_classes, k_shot, n_cluster
 def sample_KMEAN_support(dataset):
     get_proto_loader = DataLoader(dataset, batch_size=batch_size, shuffle=False, num_workers=8)
     embs, l = extract_embeddings(model, get_proto_loader)
-    support_set = select_support_set_kmeans(embs, l, num_classes=num_class, k_shot=K_support)
+    support_set = select_support_set_kmeans(embs, l, num_classes=num_class, k_shot=K_support, n_clusters=K_support)
     prototypes = torch.cat([torch.stack(v).mean(dim=0).view(1, -1) for v in support_set.values()], dim=0)
 
     return prototypes
@@ -388,17 +406,17 @@ class MetricMonitor():
 
     def reset(self):
         self.metrics = defaultdict(lambda: 0)
-        self.count = 0
+        self.counts = defaultdict(lambda: 0)
 
     def update(self, metric_name, metric_value):
         self.metrics[metric_name] += metric_value
-        self.count += 1
+        self.counts[metric_name] += 1
     
     def get_mean(self, metric_name):
-        return self.metrics[metric_name] / self.count
+        return self.metrics[metric_name] / self.counts[metric_name]
 
     def __str__(self):
-        return ", ".join([f"{k}: {v / self.count}" for k, v in self.metrics.items()])
+        return ", ".join([f"{k}: {v / self.counts[k]}" for k, v in self.metrics.items()])
     
 # ====== Training ======
 def forward_pass(model, data, is_train=True):
@@ -427,7 +445,7 @@ def forward_pass(model, data, is_train=True):
         ood_x, _, ood_t = random_sampling_OOD(y)
         if (len(ood_x) != 0):
             ood_output = model(ood_x, ood_t, device) if (not USE_OTHER_MODELS) else model(ood_x)
-        
+
     return output, proto_out, proto_y, ood_output, y
 
 def evaluate(model, test_loader, current_accuracy=0, proto=None):
@@ -546,7 +564,20 @@ for epoch in range(epochs):
             p_x, p_y, p_t = sample_global_support(get_proto_set)
             proto_x, proto_y, proto_t = p_x, p_y, p_t
 
+    temp_best_acc = best_accuracy
     best_accuracy, eval_loss = evaluate(model, val_loader, best_accuracy, prototypes if (USE_KMEANS) else None)
+    if (best_accuracy > temp_best_acc and epoch > 100):
+        print("====== Evaluate on Test ======")
+        if (EPISODIC_TRAIN):
+            get_proto_set = RoadDataset_v3(dataset=DATASET, mode='train', road_type=road_type, with_time=True, embed=d_model, new=False, seperate_proto=False if (USE_KMEANS) else True, shot = 5 if (USE_KMEANS) else K_support, ws = ws, s = s)
+            if (USE_KMEANS):
+                prototypes = sample_KMEAN_support(get_proto_set)
+            else:
+                p_x, p_y, p_t = sample_global_support(get_proto_set)
+                proto_x, proto_y, proto_t = p_x, p_y, p_t
+
+        evaluate(model, test_loader, proto=prototypes if (USE_KMEANS) else None)
+
     train_his.append((eval_loss, train_loss))
 
 eval_loss, train_loss = zip(*train_his)

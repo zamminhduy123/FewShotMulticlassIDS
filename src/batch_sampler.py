@@ -135,7 +135,7 @@ class FewShotBatchSamplerModified(object):
             self.indices_per_class[c] = torch.where(self.dataset_targets == c)[0]
             self.batches_per_class[c] = self.indices_per_class[c].shape[0] // self.K_shot
 
-        self.batches_per_class[0] = 0
+        # self.batches_per_class[0] = 0
         self.iterations = (int(np.max(list(self.batches_per_class.values()))) // self.N_way)
 
         if shuffle_once or self.shuffle:

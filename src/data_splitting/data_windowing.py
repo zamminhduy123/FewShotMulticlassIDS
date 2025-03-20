@@ -260,15 +260,15 @@ def process_data(df, label = 1, decimal = False, isCHD=False):
 
 
     # Apply MinMaxScaler to each column
-    scaler = StandardScaler()
-    scaler_cols = ['Data0' if (isCHD) else 'Data8', 'Data1', 'Data2', 'Data3', 'Data4', 'Data5', 'Data6', 'Data7',
-                    'TSLM',
-                    'time_diffs',
-                    'id']
-    df[scaler_cols] = scaler.fit_transform(df[scaler_cols])
+    # scaler = StandardScaler()
+    # scaler_cols = ['Data0' if (isCHD) else 'Data8', 'Data1', 'Data2', 'Data3', 'Data4', 'Data5', 'Data6', 'Data7',
+    #                 'TSLM',
+    #                 'time_diffs',
+    #                 'id']
+    # df[scaler_cols] = scaler.fit_transform(df[scaler_cols])
 
     feature_col = [col for col in df.columns if col not in ['time', 'label', 
-                                                            # 'TSLM', 'time_diffs'
+                                                            'TSLM', 'time_diffs'
                                                             ]]
     # Step 2: Add this array as a new column to the original DataFrame
     df['features'] = df[feature_col].apply(lambda row: [row[col] for col in feature_col], axis=1)
@@ -305,24 +305,26 @@ def parse_args():
     # Basic configuration
     parser.add_argument('--window-type', type=str, default='2d', help='Type of windowing to use')
     parser.add_argument('--chd', action='store_true', help='Use car-hacking dataset')
-    parser.add_argument('--is-mar', action='store_true', help='Use MAR dataset')
+    parser.add_argument('--is-mas', action='store_true', help='Use MAR dataset')
+    parser.add_argument('--full-road', action='store_true', help='Whether to merge the fabrication and masquerade datasets')
     parser.add_argument('--exclude-something', action='store_true', help='Whether to exclude certain data')
     parser.add_argument('--exclude-name', type=str, default='fuzzing', help='Name of data to exclude')
-    parser.add_argument('--process-type', type=str, default='ss_11_2d_no', help='Type of processing')
     
     # Window parameters
     parser.add_argument('--window-size', type=int, default=16, help='Size of the sliding window')
     parser.add_argument('--step', type=int, default=1, help='Step size for sliding window')
     parser.add_argument('--feature', type=int, default=11, help='Number of features')
+    parser.add_argument('--process-type', type=str, default='ss_11_2d_no', help='Type of processing')
     
     # Split parameters
     parser.add_argument('--test-size', type=float, default=0.8, help='Proportion of test split')
-    parser.add_argument('--val-split', default=True, action='store_true', help='Whether to create validation split')
-    parser.add_argument('--val-size', type=float, default=0.5, help='Proportion of validation split')
+    parser.add_argument('--val-split', default=True, help='Whether to create validation split', action=argparse.BooleanOptionalAction)
+    parser.add_argument('--val-size', type=float, default=0.2, help='Proportion of validation split')
+    parser.add_argument('--extra', type=str, default='_90test20val', help='Extra suffix for file names')
     
     # Data configuration
     parser.add_argument('--data-type', type=str, default='dec', help='Type of data processing')
-    parser.add_argument('--extra', type=str, default='_90test', help='Extra suffix for file names')
+
     
     # Paths
     parser.add_argument('--road-data-path', type=str, 
@@ -367,12 +369,12 @@ def make_data_2d(path, args):
     ex_label = np.empty((0))
     ex_time = np.empty((0, args.window_size))
     
-    unique_ids = ROAD_LABEL_MAP_UNIQUE_IDS if (not args.is_mar) else ROAD_MAS_LABEL_MAP_UNIQUE_IDS
-    mas_str = "_masquerade" if (args.is_mar) else ""
+    unique_ids = ROAD_LABEL_MAP_UNIQUE_IDS if (not args.is_mas) else ROAD_MAS_LABEL_MAP_UNIQUE_IDS
+    mas_str = "_masquerade" if (args.is_mas) else ""
     
     num_data = 0
     # INCREASE range(1, 3) if want to merge both fabrication and masquerade
-    for num_data in range(1, 2):
+    for num_data in range(1, 3 if args.full_road else 2):
         for entry in unique_ids.keys():
             if (args.chd and not entry.endswith('.csv')):
                 continue
@@ -486,7 +488,7 @@ def make_data_2d(path, args):
 
                 print("done ", entry)
         
-        unique_ids = ROAD_MAS_LABEL_MAP_UNIQUE_IDS
+        unique_ids = ROAD_FULL_MAS_LABEL_MAP_UNIQUE_IDS
         mas_str = "_masquerade" 
         path = args.mar_path
         num_data+=1
@@ -496,6 +498,14 @@ def make_data_2d(path, args):
 
     folder = 'car-hacking' if args.chd else 'road'
     save_dir = os.path.join(args.save_path, folder)
+
+    # Data scaling
+    scaler = StandardScaler()
+    xtrain = scaler.fit_transform(xtrain.reshape(-1, xtrain.shape[-1])).reshape(xtrain.shape)
+    xtest = scaler.transform(xtest.reshape(-1, xtest.shape[-1])).reshape(xtest.shape)
+    if args.val_split:
+        xval = scaler.transform(xval.reshape(-1, xval.shape[-1])).reshape(xval.shape)
+    
     
     # Create save directory if it doesn't exist
     os.makedirs(save_dir, exist_ok=True)
@@ -519,12 +529,124 @@ def make_data_2d(path, args):
 
     return xtrain, xval, xtest, ytrain, yval, ytest
 
+def make_data_2d_no_split(path, args):
+    # Initialize empty arrays for features, labels, and timestamps.
+    x_total = np.empty((0, args.window_size, args.feature))
+    y_total = np.empty((0))
+    time_total = np.empty((0, args.window_size))
+
+    # Choose the proper unique_ids and masquerade string based on args.is_mas.
+    unique_ids = ROAD_LABEL_MAP_UNIQUE_IDS if (not args.is_mas) else ROAD_MAS_LABEL_MAP_UNIQUE_IDS
+    mas_str = "_masquerade" if (args.is_mas) else ""
+
+    # Loop over the datasets; if args.full_road is True, process both rounds (fabrication and masquerade)
+    for num_data in range(1, 3 if args.full_road else 2):
+        for entry in unique_ids.keys():
+            # If working with CHD (e.g., car-hacking) and the entry does not end with '.csv', skip it.
+            if args.chd and not entry.endswith('.csv'):
+                continue
+
+            if not args.chd:
+                df = pd.DataFrame()
+                # If the entry is not "max_engine_coolant_temp", then load multiple attack files.
+                if entry != "max_engine_coolant_temp":
+                    for i in range(3):
+                        csv_file = f"{path}/{entry}_attack_{i+1}{mas_str}_dataset.csv"
+                        temp_df = pd.read_csv(csv_file, header=None, skiprows=1, names=DATA_PROPERTY, dtype=DATA_META)
+                        print(f"Reading file: {csv_file}")
+                        print(temp_df.head())
+                        df = pd.concat([df, temp_df], ignore_index=True)
+                else:
+                    csv_file = f"{path}/{entry}_attack{mas_str}_dataset.csv"
+                    df = pd.read_csv(csv_file, header=None, skiprows=1, names=DATA_PROPERTY, dtype=DATA_META)
+                    print(f"Reading file: {csv_file}")
+                    print(df.head())
+
+                # Sort by time
+                df = df.sort_values('time', ascending=True)
+
+                # Get the label for this entry and process the data.
+                label = unique_ids[entry]
+                df = process_data(df, label, decimal=True, isCHD=args.chd)
+                print("Number of unique labels:", len(df.label.unique()))
+                print("Label counts:", df.label.value_counts())
+                print("Sample rows:\n", df.head(2))
+
+                # Create sliding windows using numpy's as_strided.
+                as_strided = np.lib.stride_tricks.as_strided
+                output_shape = ((len(df) - args.window_size) // args.step + 1, args.window_size)
+                features = as_strided(df.features, output_shape, (8 * args.step, 8))
+                timestamp = as_strided(df.time, output_shape, (8 * args.step, 8))
+                l = as_strided(df.label, output_shape, (args.step, 1))
+
+                # Build a temporary DataFrame to hold lists of windows.
+                dft = pd.DataFrame({
+                    'features': pd.Series(features.tolist()),
+                    'time': pd.Series(timestamp.tolist()),
+                    'label': pd.Series(l.tolist())
+                }, index=range(len(l)))
+
+                # Define a helper function to map each window's label array
+                # to a single label (if any value in the window is True, use the given label; otherwise 0).
+                def map_true_false(x: np.ndarray) -> np.ndarray:
+                    result = []
+                    for row in x:
+                        if np.any(row):
+                            result.append(label)
+                        else:
+                            result.append(0)
+                    return np.array(result)
+
+                dft['label'] = map_true_false(l)
+
+                # Convert list columns to numpy arrays.
+                data_3d = np.array(dft['features'].tolist())
+                time_3d = np.array(dft['time'].tolist())
+                labels_cur = dft['label'].values
+
+                # Instead of splitting, simply concatenate everything.
+                x_total = np.concatenate((x_total, data_3d))
+                y_total = np.concatenate((y_total, labels_cur))
+                time_total = np.concatenate((time_total, time_3d))
+                print("Processed entry:", entry, "with shapes:", data_3d.shape, labels_cur.shape)
+
+        # If a second round of data is desired (e.g., when merging fabrication and masquerade),
+        # update unique_ids, mas_str, and path accordingly.
+        unique_ids = ROAD_FULL_MAS_LABEL_MAP_UNIQUE_IDS
+        mas_str = "_masquerade"
+        path = args.mar_path
+
+    print("Total data distribution:", Counter(y_total))
+
+    # Data scaling for features.
+    # scaler = StandardScaler()
+    # original_shape = x_total.shape
+    # x_total = scaler.fit_transform(x_total.reshape(-1, x_total.shape[-1])).reshape(original_shape)
+
+    # Define folder name based on args.chd flag.
+    folder = 'car-hacking' if args.chd else 'road'
+    save_dir = os.path.join(args.save_path, folder)
+    os.makedirs(save_dir, exist_ok=True)
+
+    # Use a file identifier; note that `file` should be defined or replaced by an appropriate string.
+    # Here we assume it exists in your context (or you may replace it with args.file or similar).
+    np.save(os.path.join(save_dir, f"xall-{folder}-{args.window_type}-{args.data_type}-{file}-{args.window_size}-{args.step}.npy"), x_total)
+    np.save(os.path.join(save_dir, f"yall-{folder}-{args.window_type}-{args.data_type}-{file}-{args.window_size}-{args.step}.npy"), y_total)
+    np.save(os.path.join(save_dir, f"timeall-{folder}-{args.window_type}-{args.data_type}-{file}-{args.window_size}-{args.step}.npy"), time_total)
+
+    print("Saved all data as a single npy file for each of x, y, and time.")
+    print("DONE PROCESS")
+    return x_total, y_total, time_total
+
+
 if __name__ == "__main__":
     args = parse_args()
     
     # Generate file name based on arguments
-    if args.is_mar:
+    if args.is_mas:
         file = f"mar_{args.process_type}_split{args.extra}"
+    elif args.full_road:
+        file = f"fullroad_{args.process_type}_split{args.extra}"
     else:
         file = f"fab_{args.process_type}_split{args.extra}"
     
@@ -539,6 +661,15 @@ if __name__ == "__main__":
     if args.chd:
         data_path = args.car_hacking_path
     else:
-        data_path = args.mar_path if args.is_mar else args.fab_path
+        data_path = args.mar_path if args.is_mas else args.fab_path
 
     make_data_2d(data_path, args)
+    # make_data_2d_no_split(data_path, args)
+
+## FAB
+# python data_splitting/data_windowing.py --window-type 2d --window-size 16 --step 1 --feature 9 --process-type ss_9_2d_no --test-size 0.8 --val-split --val-size 0.2 --extra _90test20val --data-type dec --is-mas
+
+#python data_splitting/data_windowing.py --window-type 2d --window-size 16 --step 1 --feature 9 --process-type ss_9_2d_no --test-size 0.5 --val-split --val-size 0.2 --extra _50test20val --data-type dec --is-mas
+
+## MAS
+# python data_splitting/data_windowing.py --window-type 2d --window-size 16 --step 1 --feature 11 --process-type ss_11_2d_no --test-size 0.8 --val-split --val-size 0.2 --extra _90test20val --data-type dec --is-mas#
