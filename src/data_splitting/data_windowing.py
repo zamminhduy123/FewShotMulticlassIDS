@@ -313,14 +313,14 @@ def parse_args():
     # Window parameters
     parser.add_argument('--window-size', type=int, default=16, help='Size of the sliding window')
     parser.add_argument('--step', type=int, default=1, help='Step size for sliding window')
-    parser.add_argument('--feature', type=int, default=11, help='Number of features')
-    parser.add_argument('--process-type', type=str, default='ss_11_2d_no', help='Type of processing')
+    parser.add_argument('--feature', type=int, default=9, help='Number of features')
+    parser.add_argument('--process-type', type=str, default='ss_9_2d_no', help='Type of processing')
     
     # Split parameters
     parser.add_argument('--test-size', type=float, default=0.8, help='Proportion of test split')
     parser.add_argument('--val-split', default=True, help='Whether to create validation split', action=argparse.BooleanOptionalAction)
-    parser.add_argument('--val-size', type=float, default=0.2, help='Proportion of validation split')
-    parser.add_argument('--extra', type=str, default='_90test20val', help='Extra suffix for file names')
+    parser.add_argument('--val-size', type=float, default=0.5, help='Proportion of validation split')
+    parser.add_argument('--extra', type=str, default='_90test50val', help='Extra suffix for file names')
     
     # Data configuration
     parser.add_argument('--data-type', type=str, default='dec', help='Type of data processing')
